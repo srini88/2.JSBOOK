@@ -87,8 +87,16 @@ initialized)
 console.log(a);   //Uncaught ReferenceError: a is not defined
 
 
+in js a variable holding primitive type directly contains the primitive value (rather than a pointer to an object)
+
+when you assign primitive value - the value is copied to whatever variable 
+
+if you set one variable to another each variable gets its own copy of the data 
 
 
+
+you identify primitive types by means of typeof operator 
+- it returns a string indicating the type of data 
 
 
 
