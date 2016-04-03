@@ -1,54 +1,44 @@
+// identifying reference types 
+
+// typeof on a function returns function 
 
 
-// bracket notation and dot notation on the properties 
+var obj = {};
 
 
-// dot notation
-var arr  = [];
+console.log(typeof obj);  //object 
 
-console.log(arr);
+var arr = [];
 
-
-arr.push(123);
-
-console.log(arr);  //[123]
+console.log(typeof arr);  //object - array is kindof object 
 
 
-// bracket notation
+function srini(){
 
-// With bracket notation, the name of the method is now included in a
-// string enclosed by square brackets
+	return 1;
+}
 
-// var arr1 = [];
-
-// arr1["push"](123);
-
-// console.log(arr1);  //[123]
+console.log(typeof srini);   //function - remmeber no paranthesis for fn
 
 
-// var arr1 = [];
-
-// arr1["push"](123);
-// arr1["push"](456);  // adds another - does not override - remember
+// for all reference types other than functions, typeof returns object 
+// istenad use instanceof 
 
 
-
-// console.log(arr1);  //[123, 456]
-
+// instanceof takes two - one before and one after - before is the name of the object you wanna check - after is the constructor name like Object , array etc 
 
 
+console.log( srini instanceof Function);    // true
+console.log( srini instanceof Object);    // true  , not sure why it returns true 
 
-var arr1 = [];
-
-var temp = "push";
+console.log(obj instanceof Object);  // true
 
 
-arr1[temp](98);
-console.log(arr1);  //98
+console.log(arr instanceof Object);  // true  - everything is an instance of object I guess 
 
-// why the hell you use bracket notation ?
+// The instanceof operator can identify inherited types. That means
+// every object is actually an instance of Object because every reference type
+// inherits from Object.
 
-// This syntax is very useful when you want to dynamically decide which
-// property to access.
 
-// temp has a value of push - so push is called on the array 
+console.log(arr instanceof Array);   // true
