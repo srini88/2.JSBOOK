@@ -1,24 +1,34 @@
+// primitive wrapper types 
+
+// 3 of them string, number and boolean 
+
+// to make working
+// with primitive values as easy as working with objects
+
+// The primitive wrapper types are reference types that are automatically
+// created behind the scenes whenever strings, numbers,
+// or Booleans
+// are read.
+
+var name = "srini";
 
 
-var arr = [2, 3, 4];
+var firstChar = name.charAt(0);  // The second line treats name like an object and
+//calls charAt(0) using dot notation
 
-console.log(arr instanceof Array);  // true
-console.log(Array.isArray(arr));  // true
-
-//isArray is a method on Array 
+console.log(firstChar);  //s
 
 
-console.log(Array.isArray([]));  // true
-console.log(Array.isArray([1]));  // true
-console.log(Array.isArray(new Array()));  //true
+// behind the scenens
 
-// below all false 
+// var name = "Nicholas";
+// var temp = new String(name);
+// var firstChar = temp.charAt(0);
+// temp = null;
+// console.log(firstChar);
 
-Array.isArray();
-Array.isArray({});
-Array.isArray(null);
-Array.isArray(undefined);
-Array.isArray(17);
-Array.isArray('Array');
-Array.isArray(true);
-Array.isArray(false);
+
+name.last = "pv";
+
+
+console.log(name.last);  // undefined - wont work 
