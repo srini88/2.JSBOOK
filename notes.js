@@ -174,5 +174,19 @@ literals, Boolean literals, the null literal, and the undefined literal.)
 
 
 
+While JavaScript doesn’t have classes, it does have types. Each variable
+or piece of data is associated with a specific primitive or reference type.
+The five primitive types (strings, numbers, Booleans, null, and undefined)
+represent simple values stored directly in the variable object for a given
+context. You can use typeof to identify primitive types with the exception
+of null, which must be compared directly against the special value null.
+Reference types are the closest thing to classes in JavaScript, and
+objects are instances of reference types. You can create new objects
+using the new operator or a reference literal. You access properties and
+methods primarily using dot notation, but you can also use bracket notation.
+Functions are objects in JavaScript, and you can identify them with
+the typeof operator. You should use instanceof with a constructor to identify
+objects of any other reference type.
+
 
 
