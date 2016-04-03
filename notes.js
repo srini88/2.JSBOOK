@@ -1,0 +1,99 @@
+before all classes like c++ and java 
+js dont use classes 
+
+oo characteristics : 
+
+Encapsulation Data can be grouped together with functionality
+that operates on that data. This, quite simply, is the definition of
+an object.
+
+Aggregation One object can reference another object.
+
+Inheritance A newly created object has the same characteristics
+as another object without explicitly duplicating its functionality.
+
+Polymorphism One interface may be implemented by multiple
+objects.
+
+
+JS has all these characteristics - even though without classes 
+different way of implementation using dot notation 
+
+Many object-oriented languages use dot notation to access properties
+and methods on objects, and JavaScript is syntactically the same. But in
+JavaScript, you never need to write a class definition, import a package,
+or include a header file. You just start coding with the data types that you want, and you can group those together in any number of ways. You could
+certainly write JavaScript in a procedural way, but its true power emerges
+when you take advantage of its object-oriented nature. That’s what this
+book is about
+
+
+JavaScript’s weakly typed nature allows
+you to write less code to accomplish the same tasks as other languages.
+
+JS is weakly typed 
+
+just start coding without planning any classes ---- full ad hoc type javascript 
+
+forgot method - add that shit later 
+
+JS is not class based inheritance - it is prototype based inheritance and constructor functions that behave similarly 
+
+
+JS lacks classess - because of it it also lacks class groupings 
+
+everything in JS is an object or accessed through an object 
+
+even functions are represented as objects in JS , which makes them first class functions 
+
+Working with and understanding objects is key to understanding JavaScript
+as a whole. You can create objects at any time and add or remove
+properties from them whenever you want. In addition, JavaScript
+objects
+are extremely flexible and have capabilities that create unique and interesting
+patterns that are simply not possible in other languages.
+
+primitive and reference
+
+primitive - stored as simple data types 
+reference - stored as objects which are really just references to locations in memory 
+
+While other programming languages distinguish between primitive
+and reference types by storing primitives on the stack and references in
+the heap, JavaScript does away with this concept completely: It tracks
+variables for a particular scope with a variable object. Primitive values are
+stored directly on the variable object, while reference values are placed as
+a pointer in the variable object, which serves as a reference to a location
+in memory where the object is stored
+
+
+5 primitive types in JS 
+
+
+Boolean true or false
+
+Number Any integer or floating-point numeric value
+
+String A character or sequence of characters delimited
+by either single or double quotes (JavaScript has no
+separate character type)
+
+Null A primitive type that has only one value, null
+
+Undefined A primitive type that has only one value, undefined
+(undefined is the value assigned to a variable that is not
+initialized)
+
+console.log(a);   //Uncaught ReferenceError: a is not defined
+
+
+
+
+
+
+
+
+
+
+
+
