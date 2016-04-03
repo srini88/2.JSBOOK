@@ -140,3 +140,31 @@ object variable to null.
 var object1 = new Object();
 // do something
 object1 = null; // dereference   - remmeber this imp
+
+
+You’ve seen how to create and interact with generic objects created with
+new Object().
+
+
+ The Object type is just one of a handful of built-in reference
+types that JavaScript provides.
+
+other types include 
+
+
+Array An ordered list of numerically indexed values
+Date A date and time
+Error A runtime error (there are also several more specific
+error subtypes)
+Function A function
+Object A generic object
+RegExp A regular expression
+
+
+
+
+
+
+
+
+
