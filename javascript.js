@@ -1,57 +1,55 @@
-var color1 = "red";
+// var name = "srini";
 
-var color2 = color1;
-
-console.log(color1);
-
-console.log(color2);
+// var name1 = "SRINI";
+// console.log(name.toUpperCase());  //SRINI
+// console.log(name1.toLowerCase());  // srini
 
 
-color2 = "blue";
-console.log(color1);  //red
+// console.log(name.charAt(8));  // nothing
+// console.log(name.charAt(3));  // n
 
-console.log(color2);   //blue  - does not change because primitive type
+//http://stackoverflow.com/questions/3745515/what-is-the-difference-between-substr-and-substring
 
-
-// color1 and 2 complete separeate from each other - you changge color 1 without affecting color2 and vicev3ersa 
-// - different storeage locations one for each variable 
-// - directly stored in the varibale object without poointers or some shit 
-// Because each variable containing a primitive value uses its own
-// storage
-// space, changes to one variable are not reflected on the other.
+// substr and substring differnt - use substring which takes start and end 
 
 
-var color3 = true;
-var color4 = null;
-var color5 = undefined;
-var color7;
-var color8 = 8.7;
-var color9 = 10;
+// The substring() method extracts the characters from a string, between two specified indices, and returns the new sub string.
 
-console.log(typeof color1); // str
-console.log(typeof color2); // str
-console.log(typeof color3);  // boolean
-console.log(typeof color4);  // object
-console.log(typeof color5);  // undefined 
-console.log(typeof color6);  // undefined 
-console.log(typeof color7);  // undefined 
-console.log(typeof color8);  // num 
-console.log(typeof color9);  // num
-console.log(typeof null);   // object
-console.log(typeof NULL);   // undefined -- remember it is small null not caps 
+// This method extracts the characters in a string between "start" and "end", not including "end" itself.
 
-// The best way to determine if a value is null is to compare it against
-// null directly, like this:
+// If "start" is greater than "end", this method will swap the two arguments, meaning str.substring(1,4) == str.substring(4,1).
 
-console.log(null === color4);  // true
-console.log(null === color7);  // false
-//console.log(null === color6);  // Uncaught ReferenceError: color6 is not defined
+// If either "start" or "stop" is less than 0, it is treated as if it were 0.
 
-// The reason is that triple equals does the comparison without
-// coercing the variable to another type. To understand why this is important,
-// consider the following:
+// Note: The substring() method does not change the original string.
 
-console.log("5" == 5); // true - converts string to number 
-console.log("5" === 5); // false
-console.log(undefined == null); // true   // dont know if null gets converted to undefined 
-console.log(undefined === null); // false
+
+var name2 = "My name is srini";
+
+console.log(name2.substring(0)); // My name is srini // start and no end - fetches all 
+
+console.log(name2.substring(1)); // y name is srini // start at 1 and no end - fetches rest
+
+
+console.log(name2.substring(1,3));  //y
+console.log(name2.substring(3,1));   //y str.substring(1,4) == str.substring(4,1).
+
+console.log(name2.substring(-1));   //If "start" is less than 0, it will start extraction from index position 0
+
+
+// extract the first character 
+
+console.log(name2.charAt(0));  //M
+console.log(name2.substring(0,1));  //M
+
+
+// extract the last character 
+
+//The length property represents the length of a string.
+var len = name2.length;
+
+console.log(len);   //16
+console.log(name2.substring(len-1, len));   // i
+ 
+
+

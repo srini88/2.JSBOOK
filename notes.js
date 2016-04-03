@@ -102,6 +102,9 @@ you identify primitive types by means of typeof operator
 
 
 
+PRIMITIVE METHODS - null and undefined have no methods 
+- strings have ton of methods 
+
 
 
 
