@@ -106,5 +106,37 @@ PRIMITIVE METHODS - null and undefined have no methods
 - strings have ton of methods 
 
 
+reference types represent objects in JS 
+- closest to classes 
+
+object is an unordered list of properties consists of a nem and a value 
+
+IN js object properties may contain a function that can be executed 
+
+JS objects are nothing more than a hash table 
+couple of ways to create or instantiate objects 
 
 
+1) new operator with a constructor 
+
+
+(A constructor
+is simply a function that uses new
+to create an object—any function can be a constructor.)
+
+constructors in JavaScript begin with a capital letter to distinguish them from nonconstructor functions. For
+example, this code instantiates a generic object and stores a reference
+to it in object:
+var object = new Object();
+
+
+Dereferencing Objects
+JavaScript is a garbage-collected language, so you don’t really need to
+worry about memory allocations when you use reference types. However,
+it’s best to dereference objects that you no longer need so that the garbage
+collector can free up that memory. The best way to do this is to set the
+object variable to null.
+
+var object1 = new Object();
+// do something
+object1 = null; // dereference   - remmeber this imp
