@@ -1,42 +1,38 @@
 
-// Array An ordered list of numerically indexed values
-// Date A date and time
-// Error A runtime error (there are also several more specific
-// error subtypes)
-// Function A function
-// Object A generic object
-// RegExp A regular expression
+
+// You almost always define functions using their literal form. In fact, using
+// the Function constructor is typically discouraged given the challenges of
+// maintaining, reading, and debugging a string of code rather than actual
+// code, so you’ll rarely see it in code.
 
 
-
-// <p>The internal clock in JavaScript starts at midnight January 1, 1970.</p>
-
-var arr = new Array();
-// works like this also var arr = new Array;  without para 
-
-console.log(arr);   //[]   // see para here instead of object {}
+// functions always in a literal form 
 
 
-var now = new Date();
+// object literal way for functions 
 
-console.log(now);   //Sat Apr 02 2016 20:58:59 GMT-0500 (Coordinated Universal Time)
-
-var err = new Error();
-
-console.log(err);   //Error(…)
-
-var err1 = new Error("something bad happened ");
-
-console.log(err1);  //Error: something bad happened (…)
+function reflect(value){
+	return value;
+}
 
 
-var func = new Function();
+console.log(reflect(5));  //5
 
-console.log(func);   // function anonymous(){}
+// 2nd way using the new and constructor function 
+// use the function constructor 
+// you use the function name in the first
+var reflect1 = new Function("value", "return value");
 
-var func1 = new Function("console.log('Hi')");
-console.log(func1);
 
-// function anonymous() {
-// console.log('Hi')
-// }
+console.log(reflect1(5));  //5
+
+
+// Regular Expression Literals
+// JavaScript also has regular expression literals that allow you to define regular
+// expressions without using the RegExp constructor. Regular expression
+// literals look very similar to regular expressions in Perl: The pattern is contained
+// between two slashes, and any additional options are single characters
+// following the second slash. For example:
+// var numbers = /\d+/g;
+// // is the same as
+// var numbers = new RegExp("\\d+", "g");
