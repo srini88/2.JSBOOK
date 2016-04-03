@@ -161,7 +161,15 @@ Object A generic object
 RegExp A regular expression
 
 
+2) seciond way is to use a literal form 
 
+
+A literal is syntax that
+allows you to define a reference value without explicitly creating an object,
+using the new operator and the object’s constructor. (Earlier in this chapter,
+you saw examples of primitive literals including string literals,
+numeric
+literals, Boolean literals, the null literal, and the undefined literal.)
 
 
 
