@@ -1,29 +1,45 @@
 
+// now reuse the same function on different objects 
+
+
 var person1 = {
 
 	name :"srinivas",
-	sayName : function(){
-		console.log(this.name);   // using this.name.
-		console.log(this);  // prints Object with name srinivas
-
-	}, 
-	setName : function (naam){
-		this.name = naam;
-	}
+	sayName : sayNameAll   // copying one function to another 
 };
 
-person1.sayName();  // srinivas
 
-// declaring function outside 
+var person2 = {
 
-function sayName(){
-	console.log(this.name);     // pussy
-	console.log(this);   // prints Window // called on Window object - as name is outside and belongs to window scope 
-}
+	name :"viswanath",
+	sayName : sayNameAll
+};
+
 
 var name = "pussy";
 
-sayName();
+function sayNameAll(){
+	console.log(this.name);
+	console.log(this);
+}
+
+
+person1.sayName();  // srinivas  // object
+person2.sayName();  // viswanath  // object
+sayNameAll();  // pussy   // window 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
