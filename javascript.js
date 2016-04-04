@@ -1,64 +1,45 @@
-// changin this 
+// the second methiod you can use to manipulate this is appy()
+// apply() works exactly the same as call() it accepts only two parameters 
+// call () accepts many 
 
-// this is very useful in JS 
-// change this value to achieve different goals
-// there are three function methods that allow you to change the value of this 
+// two parameters 
+// the value for thsi 
+// ann array or array-liek object of parameters to apss to the function 
+// you can use the arguments object as the second parameters s
 
-// fns are objects, objects can have methods so functions can too 
+// instead of naming each parameters using call(), you easily pass arrays to apply() as the second argument 
 
-
-// the call () method 
-
-// executes whatever function with a particular "this" you specify 
-// and also with parameters 
-
-// first parameter of call is the value to which "this" should be equal when the funtion is executed 
-// all other aprameters are the parameters that should be passed into the fucntion
+// The difference is that apply lets you invoke the function with arguments as an array; call requires the parameters be listed explicitly. A useful mnemonic is "A for array and C for comma."
 
 
 
-// function say(){
-// 	console.log(this.name);
-// 	console.log(this);
-// }
+// theFunction.apply(valueForThis, arrayOfArgs)
 
-// 
+// theFunction.call(valueForThis, arg1, arg2, ...)
 
-// say();  // prints srini and window 
+
+// remember the second parameter of apply and call is optional 
+// in that case both are same, both behave the same 
 
 function say(){
 	console.log(this.name);
 }
 
-var person1 = {
-	name: "srinivas"
+var name = "A";
+
+var p1 = {
+	name : "p1"
 };
 
-var person2 = {
-	name : "viswanath"
+var p2 = {
+	name :"p2"
 };
 
-var name = "srini";
-
-say.call(this);      // first parameter to call is the object you want this to be ... you just used this here .. so it takes global and the global name outside any object, in this case srini
-say.call();   // gives srini too -- by not giving this- think it takes global 
-
-// we are explicity specifying the value of this below 
-say.call(person1);  // make this point to person one , so in say method this.name is serinivas
-// srinivas
-
-say.call(person2);
-
-// viswanath
+// not giving second parameter 
+say.apply(this);  // A
+say.apply(p1);  // P1
+say.apply(p2);  //P2
 
 
 
-
-
-
-
-
-
-
-
-
+// lets give second parameter now 
