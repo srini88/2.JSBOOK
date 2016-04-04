@@ -21,25 +21,28 @@
 // remember the second parameter of apply and call is optional 
 // in that case both are same, both behave the same 
 
-function say(){
-	console.log(this.name);
+// lets give second parameter now 
+
+
+// lets not use object now, simply use undefined 
+
+function say(name, profession){
+	console.log("my name is "+ name + " and profession is  "+ profession);
 }
 
-var name = "A";
 
-var p1 = {
-	name : "p1"
-};
+say("srini", "developer");  //my name is srini and profession is  developer
 
-var p2 = {
-	name :"p2"
-};
+say.call(undefined, "pv", "tester");  //my name is pv and profession is  tester
+say.apply(undefined, ["vas", "performer"]);  //my name is vas and profession is  performer
 
-// not giving second parameter 
-say.apply(this);  // A
-say.apply(p1);  // P1
-say.apply(p2);  //P2
+//say.call(undefined, ["vas", "performer"]);  // wrong, cant use array in call - some stupid results 
 
 
 
-// lets give second parameter now 
+
+
+
+
+
+
