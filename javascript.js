@@ -1,75 +1,52 @@
-// function parameters 
+/// you want to write a sum method
+// you dont know how many arguments you need 
+
+/// so you got to use the arguments[] array 
 
 
-// you pass any number of parameters to any function without causing an error 
-// function paramters are stored in an array-like structure called arguments 
+// Sometimes, however, using arguments is actually more effective than
+// naming parameters. For instance, suppose you want to create a function
+// that accepts any number of parameters and returns their sum. You can’t
+// use named parameters because you don’t know how many you will need,
+// so in this case, using arguments
+// is the best option.
 
-// just like regular JS array, arguments can grow to contain any number of values 
+// using while loop
 
-// values are referenced using numeric indices 
-
-// arguments[0]
-// arguments[1]
-// arguments[2]
-
-
-// and there is a length property to determine how many values are present 
+// The sum() function accepts any number of parameters and adds them
+// together by iterating over the values in arguments with a while loop
 
 
-// arguments object is automatically avalibale inside any function 
-
-
-// arguments object is not an instance of Array  and therefore does not have the same methods as an array 
-
-
-// Array.isArray(arguments) always returns false 
-
-
-// the length property indicates the function's arity 
-// or the number of parameters it expects 
-
-// how many parameters you pass in to a fun , you wont get an error 
-
-// number of paramters a function has determines the function arity or lengh 
-// but the number of arguments passed to the function has no effect on the reported arity 
-
-
-function reflect(value){
-	return ++value;
-}
-console.log(reflect(5));  //6
-
-console.log(reflect.length);  //1
-console.log(reflect(5, 6));  // how many you pass , it does not affect arity , only the function definition can affect arity or length , so the next statement still prints 1 
-
-// prints 6
-
-
-console.log(reflect.length);  //1
-
-
-function reflect2(value1, value2){
-	return ++value1;
+function sum(){
+	var result = 0;
+	var len  = arguments.length;   // arguments is accessible inside this function itself 
+	var i = 0;
+	while (i < len){
+		result += arguments[i];
+		i++;
+	}
+	return result;
 }
 
-console.log(reflect2(5));  //6
-
-console.log(reflect2.length);  //2  // because here definitin of the function changed 
-
-
-
-function reflect3(boo){
-	console.log(reflect3.length);   // could access reflect3 inside 
-	//also this.length works 
-	console.log(arguments[0]);  // motheryaar
-
-	console.log(Array.isArray(arguments));  //false,., not an array
-}
-
-reflect3();  //1
-reflect3("motheryaar");  //1 
+console.log(sum(2, 3));  //5
+console.log(sum(2, 3, 4));  //9
+console.log(sum(2, 3, 4, 5));  //14
 
 
+// using for loop and function expression 
 
+var sum1 = function(){
+	var result = 0;
+	var len = arguments.length;
 
+	for (var i =0; i < len; i++)
+	{
+		result += arguments[i];
+	}
+	return result;
+};
 
+console.log(sum1(2, 3));  //5
+console.log(sum1(2, 3, 4));  //9
+console.log(sum1(2, 3, 4, 5));  //14
+console.log(sum1());  //0
