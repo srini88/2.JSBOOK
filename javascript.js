@@ -1,48 +1,76 @@
-// the second methiod you can use to manipulate this is appy()
-// apply() works exactly the same as call() it accepts only two parameters 
-// call () accepts many 
-
-// two parameters 
-// the value for thsi 
-// ann array or array-liek object of parameters to apss to the function 
-// you can use the arguments object as the second parameters s
-
-// instead of naming each parameters using call(), you easily pass arrays to apply() as the second argument 
-
-// The difference is that apply lets you invoke the function with arguments as an array; call requires the parameters be listed explicitly. A useful mnemonic is "A for array and C for comma."
 
 
+// difference between call and apply 
+// http://hangar.runway7.net/javascript/difference-call-apply
 
-// theFunction.apply(valueForThis, arrayOfArgs)
+var p1 = {
+	name :"A", 
+	age: 21
+};
 
-// theFunction.call(valueForThis, arg1, arg2, ...)
+var p2 = {
+	name : "B", 
+	age : 23
+};
 
 
-// remember the second parameter of apply and call is optional 
-// in that case both are same, both behave the same 
+var sayHello = function(){
+    console.log('Hello, ' + this.name);
+};
 
-// lets give second parameter now 
+var sayGoodbye = function(){
+    console.log('Goodbye, ' + this.name);
+};
 
 
-// lets not use object now, simply use undefined 
+// the difference between call and apply comes when you deal with arguments
 
-function say(name, profession){
-	console.log("my name is "+ name + " and profession is  "+ profession);
+
+// say with one argument 
+function say(greeting){
+	console.log(greeting + " , "+this.name );
 }
 
+say.call(p1, "Hello");   // Hello , A
+say.call(p2, "Hello");  // Hello , B
 
-say("srini", "developer");  //my name is srini and profession is  developer
-
-say.call(undefined, "pv", "tester");  //my name is pv and profession is  tester
-say.apply(undefined, ["vas", "performer"]);  //my name is vas and profession is  performer
-
-//say.call(undefined, ["vas", "performer"]);  // wrong, cant use array in call - some stupid results 
+// So that's call for you. It runs the function in the context of the first argument, and subsequent arguments are passed in to the function to work with.
 
 
+// now lets see how it works with multiple arguments
 
 
+var update = function (name, age){
+	this.name = name;   // updating // setting the objects parameters
+	this.age = age;
+}
+
+// now we have updated here....the objects ka name and age 
+update.call(p1, "C", 40);
+update.call (p2, "D", 50 );
+
+// lets print them 
+say.call(p1, "Hello");  // Hello C 
+say.call(p2, "Hello");  // Hello D 
+
+// now you saw the effect right, you could update by sending multiple areguments 
 
 
+// now we dealt with call 
+// The limitations of call quickly become apparent when you want to write code that doesn't (or shouldn't) know the number of arguments that the functions need… like a dispatcher.
 
 
+var dispatch = function (person, method, args){
+	method.apply(person, args);
+}
 
+dispatch(p1, say, ['hiya']);   // hiya , C
+dispatch (p2, update, ["pussy", 55]);  // updating here wont print anything // so printing using say below
+// what you should see is that name in the p2 object should change to pussy
+
+
+say.call(p2, "Hello");  // prints Hello Pussy 
+
+// So that's where apply comes in - the second argument needs to be an array, which is unpacked into arguments that are passed to the called function.
+
+// So that's the difference between call and apply. Both can be called on functions, which they run in the context of the first argument. In call the subsequent arguments are passed in to the function as they are, while apply expects the second argument to be an array that it unpacks as arguments for the called function.
