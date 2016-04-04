@@ -1,16 +1,53 @@
-// converting arguments object to an array so that we can use array methods like sort or something 
-// now printing after sorting 
-function printArr(){
-	// converting javascript arguments object to an array 
-	var arrConv = Array.prototype.slice.call(arguments); // by heart this
-	// arrConv is an array
 
-	// 2nd way of conversion using array literals 
-	// remember no Array and no prototype
-	// you are calling slice and call directly on []
-	var arrConv1 = [].slice.call(arguments);
-	arrConv1.sort();   // this sort wont work if you have 1, 11, 21, and all  , just using it temporarily 
-	console.log(arrConv);  //[3, 4, 8]   // sorted now
-	console.log(arrConv1);  //[3, 4, 8]   // sorted now
+
+// function overloading in javascript 
+
+// most oo languages support function overloading, ability of a single function to have multiple signatures 
+// function signature made of function name + type of parameters the function expects 
+// one function with 1 arg, same function again with 2 args 
+// the language determines which version of a function to call based on the arguments that are passed in 
+
+// As mentioned previously, JavaScript functions can accept any number
+// of parameters, and the types of parameters a function takes aren’t specified
+// at all. That means JavaScript functions don’t actually have signatures.
+// A lack of function signatures also means a lack of function overloading
+
+
+function sayHello(){
+	console.log("Hello");
 }
-printArr(3, 8, 4);
+
+function sayHello(message){
+	console.log(message);
+}
+
+
+sayHello("BOO");  // prints BOO
+
+// In JavaScript, however, when you define multiple functions
+// with the same name, the one that appears last in your code wins.
+
+// The earlier function declarations are completely removed, and the last
+// is the one that is used
+
+// you still can mimic function overloading in JS
+
+
+function sayHi(){
+
+	if (arguments.length ==0){
+		console.log("No args passed");
+	}
+	else
+	{
+		console.log("Args passed");
+	}
+
+}
+
+sayHi();  // no args passed 
+sayHi("HE");  // Args passed
+
+// In practice, checking the named parameter against undefined is more common
+// than
+// relying on arguments.length.
