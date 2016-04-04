@@ -1,123 +1,75 @@
-// functions as values 
-
-// Because JavaScript has first-class functions, you can use them just as
-// you do any other objects. You can assign them to variables, add them
-// to objects, pass them to other functions as arguments, and return them
-// from functions. Basically, you can use a function anywhere you would
-// use any other reference value. This makes JavaScript functions incredibly
-// powerful. 
+// function parameters 
 
 
+// you pass any number of parameters to any function without causing an error 
+// function paramters are stored in an array-like structure called arguments 
+
+// just like regular JS array, arguments can grow to contain any number of values 
+
+// values are referenced using numeric indices 
+
+// arguments[0]
+// arguments[1]
+// arguments[2]
 
 
-// function sayHi(){
-// 	console.log("Hi!");
-// }
+// and there is a length property to determine how many values are present 
 
 
-// sayHi();  //Hi
+// arguments object is automatically avalibale inside any function 
 
 
-// var sayHi2 = sayHi;  // assigning function to a variable
-
-// sayHi2();  //Hi
-
-// both sayHi and sayHi2 are pointing to the same function means either can be executed with teh same result 
+// arguments object is not an instance of Array  and therefore does not have the same methods as an array 
 
 
-// functions are objects 
-
-// you can pass a fn into another fn as an argument 
+// Array.isArray(arguments) always returns false 
 
 
-// sort() - accepts a comparison method as an optional parameter 
-// this fn comparison is called whenever 2 values in the array must be compared 
+// the length property indicates the function's arity 
+// or the number of parameters it expects 
+
+// how many parameters you pass in to a fun , you wont get an error 
+
+// number of paramters a function has determines the function arity or lengh 
+// but the number of arguments passed to the function has no effect on the reported arity 
 
 
+function reflect(value){
+	return ++value;
+}
+console.log(reflect(5));  //6
 
-// var arr = [3, 2, 1, 6, 10, 8];
+console.log(reflect.length);  //1
+console.log(reflect(5, 6));  // how many you pass , it does not affect arity , only the function definition can affect arity or length , so the next statement still prints 1 
 
-// console.log(arr); //[3, 2, 1, 6, 10, 8]
-
-// // in the sort - not using a comparison function 
-// // in that case sort() converts every item to a string and then performs a comparison 
-// // you cannot accrately sort an array of numbers without sepcifying a comparison function 
-
-
-// var arr1 = arr.sort(); // also don't use arr1 just arr.sort(); does sorting inline 
-
-// console.log(arr1); //[1, 10, 2, 3, 6, 8]
-// console.log(arr); //[1, 10, 2, 3, 6, 8]  // does it inline too 
+// prints 6
 
 
-// now correct way 
+console.log(reflect.length);  //1
 
-var array1 = [3, 2, 1, 6, 10, 8];
 
-function compare (num1, num2){
-	return num1-num2;
+function reflect2(value1, value2){
+	return ++value1;
 }
 
-//array1.sort(compare()); // wrong syntax - getting wrong results // dont use ()
+console.log(reflect2(5));  //6
 
-
-array1.sort(compare);
-console.log(array1);  //[1, 2, 3, 6, 8, 10]
-
-
-//aother way of writing 
-
-
-var array2 = [3, 2, 1, 6, 10, 8];
-
-var comp2 = function (num1, num2){
-	return num1-num2;
-};
+console.log(reflect2.length);  //2  // because here definitin of the function changed 
 
 
 
-array2.sort(comp2);
-console.log(array2);  //[1, 2, 3, 6, 8, 10]
+function reflect3(boo){
+	console.log(reflect3.length);   // could access reflect3 inside 
+	//also this.length works 
+	console.log(arguments[0]);  // motheryaar
 
-//the default comparison converts all
-//values to strings before comparing them.
+	console.log(Array.isArray(arguments));  //false,., not an array
+}
 
-
-// The sort() method sorts the items of an array.
-
-// The sort order can be either alphabetic or numeric, and either ascending (up) or descending (down).
-
-// By default, the sort() method sorts the values as strings in alphabetical and ascending order.
-
-// This works well for strings ("Apple" comes before "Banana"). However, if numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
-
-// Because of this, the sort() method will produce an incorrect result when sorting numbers.
-
-// You can fix this by providing a "compare function" (See "Parameter Values" below).
-
-// Note: This method changes the original array.
+reflect3();  //1
+reflect3("motheryaar");  //1 
 
 
-var arr3 = ["apple", "choco", "banana", "banyan"];
-
-arr3.sort();
-
-console.log(arr3);  // correct ["apple", "banana", "banyan", "choco"] in case of strings 
-
-
-// when using compare function on an array of strings, I'm getting wrong results - so dont use compare for strings, only for integers 
-
-var arr4 = ["apple", "choco", "banana", "banyan"];
-
-arr4.sort(function (first, second){
-	return first-second;
-});
-
-console.log(arr4); //["apple", "choco", "banana", "banyan"]
-
-
-
-// for descending order use return b-a
 
 
 
