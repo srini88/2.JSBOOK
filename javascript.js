@@ -6,30 +6,30 @@ obj1.sayName = function(){
 	console.log("name is  "+  this.name);
 }
 
+obj1.sayHello = function(){
+	console.log("saying hello : name is  "+  this.name);
+}
+//////////ENUMERATIon
+////by default all properties added to an object are enumerable 
+////iterate over them using a for - in loop
 
-///////Removing properties 
-// just as it can be addedc, they can be removed asw well 
-// setting a property to null does not remove from the object completely 
-/// remmeber it calls [[set]] with a value of nulll
-/// only replaces the value of the property 
+//console.log(obj1);
+var property;
+for (property in obj1){
+	console.log("property is : " + property + " and value is : "+ obj1[property]);
 
-////// USE the DELETE operator to completely remove 
-
-console.log("sayName" in obj1);  // true 
-console.log(obj1);   // when printing this- you get triange 
-delete obj1.sayName;
-
-console.log("sayName" in obj1);  //false
-console.log(obj1);  // here no triange means only name property exists, function is deleted 
-
-
-//// delete works on a single object proerptyy
-
-//// it called the internal operation named [[DELETE]]
-
-// remvoes a key value pair from a hash table 
-/// it returns true when successfull 
-// some properties can t be removed 
+}
+///property value is filled with the next enumerable property on the object until all properties have been used
+/// using bracket notation to retrive the value of the object property 
+//obj1[property]
 
 
+//output 
+// property is : name and value is : Srinivas
+// javascript.js:19 property is : sayName and value is : function (){
+// 	console.log("name is  "+  this.name);
+// }
+// javascript.js:19 property is : sayHello and value is : function (){
+// 	console.log("saying hello : name is  "+  this.name);
+// }
 
