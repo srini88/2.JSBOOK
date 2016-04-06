@@ -1,67 +1,41 @@
+////moving on
+
+///not all properties  are enumerable 
+
+// of the native methods on objects have their [[Enumerable]] attribute set
+// to false. You can check whether a property is enumerable by using the
+// propertyIsEnumerable()
 
 
 
-var property;
+// [[enumerable]]
 
-// not going into the for loop -nothing printed 
-// thought using for in prints all primitive shit 
-// object is empty here, not even going into for in loop 
+// propertyIsEnumerable()
 
-for (property in Object){
-	console.log("property: " + property + ", value: "+ obj[property]);
-}
-
+var obj ={
+	name : "srini", 
+	age : 21
+};
 
 
+console.log(obj.propertyIsEnumerable("name"));    ///true
+console.log(obj.propertyIsEnumerable("age"));			// true
+
+// most of the native methods it is not enumerable 
+// custom properties like above are enumerable 
+
+
+///// Lets see one that is not enumerable 
+
+var keys = Object.keys(obj);
+
+console.log("length" in keys);  // true  /// length exists in keys array
+
+console.log(keys.propertyIsEnumerable("length"));  // false, native shit
+
+// IT IS a built in property on Array.prototype....
+/// many native properties are not enumerable 
+ 
 
 
 
-
-
-/////DONT READ AFTER THIS BOOKKEEPING
-
-
-
-// var obj1 = {
-// 	name : "Srinivas"
-// };
-// // adding a new method 
-// obj1.sayName = function(){
-// 	console.log("name is  "+  this.name);
-// }
-
-// obj1.sayHello = function(){
-// 	console.log("saying hello : name is  "+  this.name);
-// }
-// console.log(obj1);
-// var property;
-// for (property in obj1){
-// 	//console.log("property is : " + property + " and value is : "+ obj1[property]);
-
-// }
-// ///// 2nd way to print properties using the method keys on the Object
-// //// it returns a goddammn array 
-// var properties  = Object.keys(obj1);
-
-// //////Object.keys() to retrieve the enumerable properties
-// console.log(properties);  /////["name", "sayName", "sayHello"]
-
-// //// now lets try to print the values of the keys as well sd
-
-// for (var i = 0; i < properties.length ; i++){  // .length on an array
-// 	console.log("property is : " + properties[i] + " and value is : "+ obj1[properties[i]]);
-// }
-// // this for loop prints the same godammn thing 
-
-
-// /////obj1[properties[i]]  correct
-// //////obj1.properties[i]  --- wrong, needs to be evaluated right
-
-// ////why two ways to enumerate the proeprties
-// /////using for in - it fetches the protype properties as well
-
-// /////////Object.keys(obj) wont fetch that shit 
-// // There is a difference between the enumerable properties returned in a for-
-// // in loop
-// // and the ones returned by Object.keys(). The for-in loop also enumerates prototype
-// // properties, while Object.keys() returns only own (instance) properties.
