@@ -28,8 +28,8 @@ Object.defineProperties(person, {
 	name : {
 		value :"srini", 
 		enumerable : true, 
-		configurable : true
-		//writable : true
+		//configurable : true
+		writable : true
 	}, 
 	age :{
 		value :25, 
@@ -42,10 +42,21 @@ Object.defineProperties(person, {
 console.log(person);  //Object {name: "srini", age: 25}
 console.log(Object.getOwnPropertyDescriptor(person, "name"));
 
+// now writable is true, but configurable is false 
 
-person.name = "boo";   // writable is false, so cannot write to it
-/// I thought it would work since configurable is set to true 
-console.log(person.name);  // still prints srini
+person.name = "boo";    
+console.log(person.name);  // prints boo since writable is true 
+
+/// we will see configurable now 
+
+
+console.log(delete person.name);  // returns false since configurable is false
+
+console.log("name" in person);  //// true , name still exists in person
+
+console.log(person.name);  //// boo
+
+
 
 
 //Object {value: "srini", writable: true, enumerable: true, configurable: true}
