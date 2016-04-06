@@ -1,32 +1,83 @@
-//// difference between configurable and writable 
-/// these are called property description
+//////////Accessor property attributes 
 
-// Writable: If false, the value of the property can not be changed.
+//// no value or writable 
+/// they have get and set which contain the getter and setter functions respectively
 
-// Configurable: If false, any attempts to delete the property or change its attributes (Writable, Configurable, or Enumerable) will fail.
+// As with the object literal form
+// of getters and setters, you need only define one of these attributes to
+// create
+// the property.
 
-// Enumerable: If true, the property will be iterated over when a user does for (var prop in obj){} (or similar).
+// If you try to create a property with both data and accessor attributes, you will get
+// an error.
 
+// As with data properties, you can also specify whether accessor properties
+// are configurable or enumerable
 
-var person = {
-	name :"srini"
+var person1 = {
+_name: "Nicholas",
+get name() {
+console.log("Reading name");
+return this._name;
+},
+set name(value) {
+console.log("Setting name to %s", value);
+this._name = value;
+}
 };
 
-console.log(Object.getOwnPropertyDescriptor(person, "name"));
-Object.defineProperty(person, "name", {
-	writable :false
+
+// the above can also be written as 
+
+var person1 = {
+_name: "Nicholas"
+};
+Object.defineProperty(person1, "name", {
+get: function() {
+console.log("Reading name");
+return this._name;
+},
+set: function(value) {
+console.log("Setting name to %s", value);
+this._name = value;
+},
+enumerable: true,
+configurable: true
 });
 
-// changing to false 
-console.log(Object.getOwnPropertyDescriptor(person, "name"));
+// Notice that the get and set keys on the object passed in to Object
+// .defineProperty() are data properties that contain a function. You can’t
+// use object literal accessor format here.
 
-console.log(Object.keys(person));  //["name"]
+// you can
+// create
+// a nonconfigurable, nonenumerable, nonwritable property
 
+var person1 = {
+_name: "Nicholas"
+};
 
-console.log(delete person.name);  // true 
-//// this is deleted even though writable is set to false, 
-/// in case of configurable you cannot delete it to o
+Object.defineProperty(person1, "name", {
+get: function() {
+console.log("Reading name");
+return this._name;
+}
+});
 
-/// writable is a subset of configurable 
+console.log("name" in person1); // true
+console.log(person1.propertyIsEnumerable("name")); // false
+delete person1.name;
+console.log("name" in person1); // true
+person1.name = "Greg";
+console.log(person1.name); // "Nicholas"
 
-console.log(Object.keys(person));  //[]
+// In this code, the name property is an accessor property with only a
+// getter
+// u. There is no setter or any other attributes to explicitly set to true,
+// so the value can be read but not changed.
+
+// As with accessor properties defined via object literal notation, an accessor
+// property
+// without a setter throws an error in strict mode when you try to change the value. In
+// nonstrict mode, the operation silently fails. Attempting to read an accessor property
+// that has only a setter defined always returns undefined.
