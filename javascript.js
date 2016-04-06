@@ -1,41 +1,25 @@
-////moving on
-
-///not all properties  are enumerable 
-
-// of the native methods on objects have their [[Enumerable]] attribute set
-// to false. You can check whether a property is enumerable by using the
-// propertyIsEnumerable()
+////TYPES OF PROPERTIES 
 
 
+////1) data properties
+// 2) accessor properties 
 
-// [[enumerable]]
-
-// propertyIsEnumerable()
-
-var obj ={
-	name : "srini", 
-	age : 21
-};
+// data properties contain a value like name proerty aove 
+/// default value of [[put ]] method is to create a data property 
+//// so far we have dealt with data properties 
 
 
-console.log(obj.propertyIsEnumerable("name"));    ///true
-console.log(obj.propertyIsEnumerable("age"));			// true
-
-// most of the native methods it is not enumerable 
-// custom properties like above are enumerable 
+/// accesor proerties dont contain a value but instead define a function to call when the property is read... called a getter 
+//// and a functionn to call when the property is written to - called a setter 
+//// Accessor properties only require either a getter or a setter, though they can have both 
 
 
-///// Lets see one that is not enumerable 
 
-var keys = Object.keys(obj);
-
-console.log("length" in keys);  // true  /// length exists in keys array
-
-console.log(keys.propertyIsEnumerable("length"));  // false, native shit
-
-// IT IS a built in property on Array.prototype....
-/// many native properties are not enumerable 
- 
+//// syntax to define an accessor property using object literal 
 
 
+var naam = "srini";
+
+console.log("name is " + naam);  /// name is srini
+console.log("name is %s", naam);  // 2nd way using %s, remembre to use comma // name is srini
 
