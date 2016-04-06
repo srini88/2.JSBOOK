@@ -17,9 +17,40 @@
 
 //// syntax to define an accessor property using object literal 
 
+// below get name and set name are accesor properties 
+/// used both getter and setter accessor property
+var person1 = {
+	_name:"Nichos", 
 
-var naam = "srini";
+	get name(){
+		console.log("reading name");
+		return this._name;
+	},
+	set name(value){
+		console.log("setting name %s", value);
+		this._name = value;
+	}
+};
 
-console.log("name is " + naam);  /// name is srini
-console.log("name is %s", naam);  // 2nd way using %s, remembre to use comma // name is srini
+console.log(person1._name); //Nichos  ///without getting and setter
+console.log(person1.name);
+// reading name
+// Nichos
 
+person1.name = "Greg";  // prints setting name Greg without console.log
+console.log(person1.name);  // Greg  (using accessor name)
+console.log(person1._name);  // greg  (using proerty _name)
+
+
+
+// we are defining an accesor proerty called name, data property is _name that contains the actual value of the property..
+//// see getter and setter look like functions, but we are not using the function keyword
+// The special keywords get
+// and set are used before the accessor property name, followed by parentheses
+// and a function body
+
+/// this behaviour or creating  adds logging to the behavior of property..
+// these accesor properties are usefull when you want the assignment of a value to trigger some sort of behaviour 
+
+
+////
