@@ -1,83 +1,54 @@
-//////////Accessor property attributes 
+// Defining Multiple Properties
+// It’s also possible to define multiple properties on an object simultaneously
+// Object.defineProperties()
 
-//// no value or writable 
-/// they have get and set which contain the getter and setter functions respectively
 
-// As with the object literal form
-// of getters and setters, you need only define one of these attributes to
-// create
-// the property.
 
-// If you try to create a property with both data and accessor attributes, you will get
-// an error.
 
-// As with data properties, you can also specify whether accessor properties
-// are configurable or enumerable
+var person = {
 
-var person1 = {
-_name: "Nicholas",
-get name() {
-console.log("Reading name");
-return this._name;
-},
-set name(value) {
-console.log("Setting name to %s", value);
-this._name = value;
-}
 };
 
+/// 2 args remember --- for defineProperty 3 args - the third arg being the property descriptor 
 
-// the above can also be written as 
+// This
+// method accepts two arguments: the object to work on and an object containing
+// all of the property information
 
-var person1 = {
-_name: "Nicholas"
-};
-Object.defineProperty(person1, "name", {
-get: function() {
-console.log("Reading name");
-return this._name;
-},
-set: function(value) {
-console.log("Setting name to %s", value);
-this._name = value;
-},
-enumerable: true,
-configurable: true
+
+// The keys of that second argument
+// are property names, and the values are descriptor objects defining the
+// attributes for those properties
+
+
+//Object.defineProperties(person, "name") /// wrong // 2nd arg itself an object with keys and values 
+
+Object.defineProperties(person, {
+	// adding data property name and age
+	name : {
+		value :"srini", 
+		enumerable : true, 
+		configurable : true
+		//writable : true
+	}, 
+	age :{
+		value :25, 
+		enumerable : true, 
+		configurable : true,
+		writable : true
+	}
 });
 
-// Notice that the get and set keys on the object passed in to Object
-// .defineProperty() are data properties that contain a function. You can’t
-// use object literal accessor format here.
+console.log(person);  //Object {name: "srini", age: 25}
+console.log(Object.getOwnPropertyDescriptor(person, "name"));
 
-// you can
-// create
-// a nonconfigurable, nonenumerable, nonwritable property
 
-var person1 = {
-_name: "Nicholas"
-};
+person.name = "boo";   // writable is false, so cannot write to it
+/// I thought it would work since configurable is set to true 
+console.log(person.name);  // still prints srini
 
-Object.defineProperty(person1, "name", {
-get: function() {
-console.log("Reading name");
-return this._name;
-}
-});
 
-console.log("name" in person1); // true
-console.log(person1.propertyIsEnumerable("name")); // false
-delete person1.name;
-console.log("name" in person1); // true
-person1.name = "Greg";
-console.log(person1.name); // "Nicholas"
+//Object {value: "srini", writable: true, enumerable: true, configurable: true}
+console.log(Object.getOwnPropertyDescriptor(person, "age"));
 
-// In this code, the name property is an accessor property with only a
-// getter
-// u. There is no setter or any other attributes to explicitly set to true,
-// so the value can be read but not changed.
-
-// As with accessor properties defined via object literal notation, an accessor
-// property
-// without a setter throws an error in strict mode when you try to change the value. In
-// nonstrict mode, the operation silently fails. Attempting to read an accessor property
-// that has only a setter defined always returns undefined.
+//Object {value: 25, writable: true, enumerable: true, configurable: true}
