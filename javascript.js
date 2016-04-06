@@ -1,45 +1,37 @@
-///moving on
+//////Data propert attribuutes
 
+//// data porperties possess two additional attributes that accesors do not
+/// value
+////The first is [[Value]], which holds the property value. This attribute is
+// filled in automatically when you create a property on an object. All property
+// values are stored in [[Value]], even if the value is a function.
+// The second attribute is [[Writable]], which is a Boolean value indicating
+// writable 
+
+
+/// bby default all properties are writable 
 
 var person = {
-	name : "Srini", 
-	age: 23
+	name :"srini"
 };
+
 console.log(Object.getOwnPropertyDescriptor(person, "name"));
+//// Object {value: "srini", writable: true, enumerable: true, configurable: true}
 
+// you see both value and writable 
+///// 2nd way of definignn the same object 
 
-// Object {value: "Srini", writable: true, enumerable: true, configurable: true}
+var person1 = {};
 
+Object.defineProperty(person1, "name", {
 
-// changin  confgiurable to false 
-Object.defineProperty(person, "name", {
-
-
-	configurable : false
-
-});
-console.log(Object.getOwnPropertyDescriptor(person, "name"));
-
-//Object {value: "Srini", writable: true, enumerable: true, configurable: false}
-
-//// now lets change it back to true
-
-
-Object.defineProperty(person, "name", {
-
-	configurable : true
-
+	value : "srini"
 });
 
-console.log(Object.getOwnPropertyDescriptor(person, "name")); ////Uncaught TypeError: Cannot redefine property: name
+console.log(Object.getOwnPropertyDescriptor(person1, "name"));
+//// Object {value: "srini", writable: false, enumerable: false, configurable: false}, the others defaulted to false 
 
-/// error can't change non configurable to configurable again 
-
-// After that, name is changed to be nonconfigurable x. From now on,
-// attempts to delete name fail because the property can’t be changed, so
-// name is still present on person1
-
-/// Effectively,
-// name is locked down as a property on person1.
-
-
+// When Object.defineProperty() is called, it first checks to see if the
+// property exists. If the property doesn’t exist, a new one is added with
+// the attributes specified in the descriptor. In this case, name isn’t already
+// a property of person1, so it is created.
