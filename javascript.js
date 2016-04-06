@@ -1,81 +1,47 @@
-//"use strict";   // use strict should be at the top 
-//console.log(delete Object.prototype); // uncaught exception
+////moving on
+//////PROPERTY attributes 
 
-//"use strict";  without strict
-console.log(delete Object.prototype); //false , without strict 
-
-
+//// before ECMA5 , no way to specify wheterh a proerty is enumberable 
+/// no way to access internal attributes of a property at al l 
 
 
-// Say I create an object as follows:
+/// learning about attributes of both data and accessor properties 
 
-var myObject = {
-	"ircEvent": "PRIVMSG",
-	 "method": "newURI", 
-	 "regex": "^http://.*"
-	};
-// What is the best way to remove the property regex to end up with new myObject as follows?
+//// the common ones 
 
-// var myObject = {"ircEvent": "PRIVMSG", "method": "newURI"};
+/// enumerable, configurable 
 
-
-console.log(myObject);
-delete myObject.regex;   // deletes it 
+// There are two property attributes shared between data and accessor
+// properties. One is [[Enumerable]], which determines whether you can
+// iterate
+// over the property. The other is [[Configurable]], which determines
+// whether the property can be changed.
 
 
-console.log(myObject);
-
-/////Other ways to delete 
-
-delete myObject.regex;
-// or,
-delete myObject['regex'];
-// or,
-var prop = "regex";
-delete myObject[prop];
+//configurable means you can delete that godammn property, add shit and all,  if it is not configurable you cannot do anything 
 
 
-http://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
+// If you want to change property attributes, you can use the Object
+// .defineProperty() method.
 
-http://perfectionkills.com/understanding-delete/
+var person = {
+	name : "Srini", 
+	age: 23
+};
 
+console.log(person);
 
-a property is assigned to undefined still is a property of an object, so it will not be removed by GC The GC doesn't manage anything about properties
+// The Object.getOwnPropertyDescriptor() method returns a property descriptor for an own property (that is, one directly present on an object, not present by dint of being along an object's prototype chain) of a given object.
 
+var obj1 = Object.getOwnPropertyDescriptor(person, "name");  /// returns an object 
+console.log(obj1);  //Object {value: "Srini", writable: true, enumerable: true, configurable: true}
 
+// now we will look at the age property
+var obj2 = Object.getOwnPropertyDescriptor(person, "age");
+console.log(obj2);  //Object {value: 23, writable: true, enumerable: true, configurable: true}
 
+/// as you can see it has the value of 23, remember the key "Value"
 
+var obj = Object.getOwnPropertyNames(person);  //// easier to use than using for in or the Object.keys 
 
-Operator delete is unexpectedly slow!
-Look at the benchmark.
-
-Delete is the only true way to remove object's properties without any leftovers, but it works ~ 100 times slower, compared to it's "alternative", setting object[key] = undefined.
-
-This alternative is not the correct answer to this question! But, if you use it with care, you can dramatically speed up some algorithms. If you are using delete in loops and you have problems with performance, read the verbose explanation.
-
-When should one use delete and when set value to undefined ?
-An object may be seen as a set of key-value pairs. What I call a 'value' is a primitive or a reference to other object, connected to that 'key'.
-
-Use delete, when you are passing the result object to the code on which you don't have control (or when you are not sure about your team or yourself).
-
-It deletes the key from the hashmap.
-
- var obj = {
-     field: 1     
- };
- delete obj.field;
-Use setting to undefined, when you care about performance. It can give a serious boost to your code.
-
-The key remains on its place in the hashmap, only the value is replaced with undefined. Understand, that for..in loop will still iterate over that key.
-
- var obj = {
-     field: 1     
- };
- obj.field = undefined;
-Using this method, not all ways of determining property existence will work as expected.
-
-However, this code:
-
-object.field === undefined
-
-will behave equivalently for both methods.
+console.log(obj);  //["name", "age"]
