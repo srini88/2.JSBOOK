@@ -8,10 +8,34 @@ var obj = {
 console.log(obj);  //Object {name: "Srinivas", age: 21}
 
 
-console.log(delete obj.age);   // delete operation returns true //true
+//////BY DEFAULT ALL PROPERTIES ADDED ARE ENUMERABLE 
 
-delete obj.name;
-console.log(obj);    //Object {age: 21}
+/// retrieving using for in 
+var property ;
+
+for (property in obj){
+	//onsole.log("property is : " + property + ", value is : " + obj[property]);
+}
+
+////now retrieve using method keys on an object - which turns the object into an array 
+
+
+
+var keys = Object.keys(obj);
+
+
+for (var i = 0; i < keys.length ; i++){
+	console.log("property: "+ keys[i] + ",value: "+ obj[keys[i]]);
+}
+
+// the above prints the same shit 
+// 
+// property: name,value: Srinivas
+// javascript.js:28 property: age,value: 21
+
+//for-in fetches prototype properties as welll // this keys method does not
+
+
 
 
 
