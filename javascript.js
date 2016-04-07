@@ -1,27 +1,17 @@
-/////preventing object modification 
-//////[[extensible]]
+///// freezing objects 
 
-// Objects, just like properties, have internal attributes that govern their
-// behavior. One of these attributes is [[Extensible]], which is a Boolean
-// value indicating if the object itself can be modified. All objects you
-// create are extensible by default, meaning new properties can be added to
-// the object at any time. You’ve seen this several times in this chapter. By
-// setting [[Extensible]] to false, you can prevent new properties from being
-// added to an object.
+// The last way to create a nonextensible object is to freeze it. If an object is
+// frozen, you can’t add or remove properties, you can’t change properties’
+// types, and you can’t write to any data properties.
 
-/////2nd way sealing 
-
-///The second way to create a nonextensible object is to seal the object. A
-// sealed object is nonextensible, and all of its properties are nonconfigurable
+// In essence, a frozen object
+// is a sealed object where data properties are also read-only. Frozen objects
+// can’t become unfrozen,
+// so they remain in the state they were in when
+// they became frozen. You can freeze an object by using Object.freeze() and
+// determine if an object is frozen by using Object.isFrozen().
 
 
-///  sealing is a superset of extensible 
-
-////That means not only can you not add new properties to the object,
-
-// but you also can’t remove properties or change their type (from data to
-// accessor or vice versa). If an object is sealed, you can only read from and
-// write to its properties.
 
 var p = {};
 
@@ -36,22 +26,22 @@ Object.defineProperty(p, "name", {
 console.log(Object.getOwnPropertyDescriptor(p, "name"));
 
 console.log(Object.isExtensible(p)); //true
-console.log(Object.isSealed(p));  // false
 
-Object.seal(p);
-
-console.log(Object.isExtensible(p)); //fa;se
-console.log(Object.isSealed(p));  //true
+Object.freeze(p);
 
 console.log(Object.getOwnPropertyDescriptor(p, "name"));
-//Object {value: "srini", writable: true, enumerable: true, configurable: false}
-
-p.name = "vas";
-console.log(p.name);  //vas  - coz writable is set to true 
+//// after freezing writable and configurable are set to false
+///Object {value: "srini", writable: false, enumerable: true, configurable: false}
 
 
+console.log(Object.isExtensible(p)); //false
+console.log(Object.isFrozen(p));  //true
 
-delete p.name;
+console.log(p.name);  //// srini
 
-console.log(p.name);  //does not delete, ///vas
+p.name="vas";    //// now changing name to vas, since it is frozen (writable set to false) , this wont happen 
+
+
+console.log(p.name);  /// name is still srini
+
 
