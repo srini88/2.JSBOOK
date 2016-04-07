@@ -27,7 +27,7 @@ var p = {};
 
 Object.defineProperty(p, "name", {
 	value :"srini", 
-	configurable : false, 
+	configurable : true, 
 	enumerable : true,
 	writable:true
 });
@@ -38,19 +38,18 @@ console.log(Object.getOwnPropertyDescriptor(p, "name"));
 console.log(Object.isExtensible(p)); //true
 console.log(Object.isSealed(p));  // false
 
-//Object.seal(p);
+Object.seal(p);
 
-console.log(Object.isExtensible(p));
-console.log(Object.isSealed(p));
+console.log(Object.isExtensible(p)); //fa;se
+console.log(Object.isSealed(p));  //true
 
 console.log(Object.getOwnPropertyDescriptor(p, "name"));
 //Object {value: "srini", writable: true, enumerable: true, configurable: false}
 
-//// configurable false, writable true - still you can change value of name
-///// but configurable effect comes in when you try to delte the name
-//// it does not delete
 p.name = "vas";
-console.log(p.name);  //vas
+console.log(p.name);  //vas  - coz writable is set to true 
+
+
 
 delete p.name;
 
