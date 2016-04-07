@@ -18,39 +18,24 @@
 
 
 
-function Person(){
+var obj  = new Object;
 
-}
-// this Person constructor does not explicity return anything, both p1 and p2 are considered instances of the new Person type 
-
-//// new operator automatically creates an object of the given type and returns it 
-
-/// first way to check whether instance or not 
-//// use instanceof operator to deduce an objects type 
-
-var person1 = new Person;
-var person2 = new Person;
+console.log(obj);  //Object
 
 
-console.log(person1 instanceof Person);  ///true
-console.log(person2 instanceof Person);   ///true
+var obj1 = {};
 
-console.log(person1 instanceof Object);  //true
+console.log(obj.constructor);  ///function Object() { [native code] }
+console.log(obj1.constructor); ///function Object() { [native code] }
 
-console.log(Person instanceof Object);  //true
-console.log(Person instanceof Function);  //true
-console.log(person1 instanceof Function);  //false
+////For generic objects (those created via an object literal or the Object constructor),constructor is set to Object  -- like above
 
-//// 2nd way use constructor property 
-
-// every object instance is automatically created with a constructor property... that contains a reference to the constructor function that created it 
-console.log(person1.constructor === Person);  //true
+//// for objects created with a custom Constructor function, constructor property on the instance points back to that constructor function instead 
 
 
-console.log(person1.constructor);   ///function Person(){}
+//// even though this relationship exists between an instance and its constructor , better to use instanceof to check the type of an instance 
 
-console.log(person1.constructor === Object);  ///false, only goes to the construcotr , not constructor's constructor 
 
-console.log(Person.constructor);  ///function Function() { [native code] }
+/// constructor property can be overwritten and therefore may not be completely accurate. 
 
-console.log(Function.constructor);  ///function Function() { [native code]  /// not sure, I thougth it would print Object
+
