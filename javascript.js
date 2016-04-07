@@ -1,41 +1,45 @@
-////////constructors and prototypes
-
-/// chapter 4
-
-//// JS lacks classes, it turns to constructors and prototypes to bring a similar order to objects 
+////// empty coonstructor isnot useful,, whole point of a constructor is to make it easy to create more objects with same properties and methods 
 
 
-/// constructor - simply a function used with new to create an object 
-
-/// many built in constructors such as Object, Array, Function
-/// advantage of constructors is  that objects created with the same constructor contain the same properties and methods 
+//// in Constructor - --- add properties to this variable...
 
 
-//// want multiple similar objects, you create your own constructors and therefore your own reference types 
+function Person(name){
 
-//// construcotr is a function, you define it same way. .. .. 
-/// first letter caps
-
-
-
-var obj  = new Object;
-
-console.log(obj);  //Object
+	this.name = name;
+	this.sayName = function(){
+		console.log("saying name %s", this.name);
+	}
+}
 
 
-var obj1 = {};
+function Person(name){
 
-console.log(obj.constructor);  ///function Object() { [native code] }
-console.log(obj1.constructor); ///function Object() { [native code] }
-
-////For generic objects (those created via an object literal or the Object constructor),constructor is set to Object  -- like above
-
-//// for objects created with a custom Constructor function, constructor property on the instance points back to that constructor function instead 
-
-
-//// even though this relationship exists between an instance and its constructor , better to use instanceof to check the type of an instance 
+	this.name = name;
+	this.sayName = function(){
+		console.log("saying name %s", this.name);
+	}
+	return 5;  ///some random return, still works, because new operator makes sure to return the instance instead
+}
 
 
-/// constructor property can be overwritten and therefore may not be completely accurate. 
+// You can also explicitly call return inside of a constructor. If the returned value
+// is an object, it will be returned instead of the newly created object instance. If the
+// returned value is a primitive, the newly created object is used and the returned
+// value is ignored.
 
 
+/// we are accepting a single named parameter and assigning it to the name property of the this object. 
+//// the this object is automatically created by new when you call the constructor and it is an instance of the constructor's type 
+
+//// no need to return a value from the function because the new operator takes care of return value 
+
+
+var p1 = new Person("srini");
+var p2 = new Person("vas");
+
+p1.sayName();  // srini
+p2.sayName();  //vas
+
+
+// each object has its own name property, so sayName returning two different values 
