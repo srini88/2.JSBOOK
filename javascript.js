@@ -1,47 +1,56 @@
-///// freezing objects 
+////////constructors and prototypes
 
-// The last way to create a nonextensible object is to freeze it. If an object is
-// frozen, you can’t add or remove properties, you can’t change properties’
-// types, and you can’t write to any data properties.
+/// chapter 4
 
-// In essence, a frozen object
-// is a sealed object where data properties are also read-only. Frozen objects
-// can’t become unfrozen,
-// so they remain in the state they were in when
-// they became frozen. You can freeze an object by using Object.freeze() and
-// determine if an object is frozen by using Object.isFrozen().
+//// JS lacks classes, it turns to constructors and prototypes to bring a similar order to objects 
 
 
+/// constructor - simply a function used with new to create an object 
 
-var p = {};
-
-Object.defineProperty(p, "name", {
-	value :"srini", 
-	configurable : true, 
-	enumerable : true,
-	writable:true
-});
+/// many built in constructors such as Object, Array, Function
+/// advantage of constructors is  that objects created with the same constructor contain the same properties and methods 
 
 
-console.log(Object.getOwnPropertyDescriptor(p, "name"));
+//// want multiple similar objects, you create your own constructors and therefore your own reference types 
 
-console.log(Object.isExtensible(p)); //true
-
-Object.freeze(p);
-
-console.log(Object.getOwnPropertyDescriptor(p, "name"));
-//// after freezing writable and configurable are set to false
-///Object {value: "srini", writable: false, enumerable: true, configurable: false}
+//// construcotr is a function, you define it same way. .. .. 
+/// first letter caps
 
 
-console.log(Object.isExtensible(p)); //false
-console.log(Object.isFrozen(p));  //true
 
-console.log(p.name);  //// srini
+function Person(){
 
-p.name="vas";    //// now changing name to vas, since it is frozen (writable set to false) , this wont happen 
+}
+// this Person constructor does not explicity return anything, both p1 and p2 are considered instances of the new Person type 
+
+//// new operator automatically creates an object of the given type and returns it 
+
+/// first way to check whether instance or not 
+//// use instanceof operator to deduce an objects type 
+
+var person1 = new Person;
+var person2 = new Person;
 
 
-console.log(p.name);  /// name is still srini
+console.log(person1 instanceof Person);  ///true
+console.log(person2 instanceof Person);   ///true
+
+console.log(person1 instanceof Object);  //true
+
+console.log(Person instanceof Object);  //true
+console.log(Person instanceof Function);  //true
+console.log(person1 instanceof Function);  //false
+
+//// 2nd way use constructor property 
+
+// every object instance is automatically created with a constructor property... that contains a reference to the constructor function that created it 
+console.log(person1.constructor === Person);  //true
 
 
+console.log(person1.constructor);   ///function Person(){}
+
+console.log(person1.constructor === Object);  ///false, only goes to the construcotr , not constructor's constructor 
+
+console.log(Person.constructor);  ///function Function() { [native code] }
+
+console.log(Function.constructor);  ///function Function() { [native code]  /// not sure, I thougth it would print Object
