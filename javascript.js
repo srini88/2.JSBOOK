@@ -9,23 +9,25 @@
 // setting [[Extensible]] to false, you can prevent new properties from being
 // added to an object.
 
-// 3 wauys to achieve this 
+/////2nd way sealing 
 
-// preventing extensions
-
-// One way to create a nonextensible object is with Object.preventExtensions().
-// This method accepts a single argument, which is the object you want to
-// make nonextensible. Once you use this method on an object, you’ll never
-// be able to add any new properties to it again. You can check the value of
-// [[Extensible]] by using Object.isExtensible()
+///The second way to create a nonextensible object is to seal the object. A
+// sealed object is nonextensible, and all of its properties are nonconfigurable
 
 
+///  sealing is a superset of extensible 
+
+////That means not only can you not add new properties to the object,
+
+// but you also can’t remove properties or change their type (from data to
+// accessor or vice versa). If an object is sealed, you can only read from and
+// write to its properties.
 
 var p = {};
 
 Object.defineProperty(p, "name", {
 	value :"srini", 
-	configurable : true, 
+	configurable : false, 
 	enumerable : true,
 	writable:true
 });
@@ -33,20 +35,24 @@ Object.defineProperty(p, "name", {
 
 console.log(Object.getOwnPropertyDescriptor(p, "name"));
 
-console.log(Object.isExtensible(p));  // true //[[extensible set to true]]
+console.log(Object.isExtensible(p)); //true
+console.log(Object.isSealed(p));  // false
 
+//Object.seal(p);
 
-Object.preventExtensions(p);
-console.log(Object.isExtensible(p));  //false
+console.log(Object.isExtensible(p));
+console.log(Object.isSealed(p));
 
-/// now extensions are prevented 
+console.log(Object.getOwnPropertyDescriptor(p, "name"));
+//Object {value: "srini", writable: true, enumerable: true, configurable: false}
 
-//// try to add a new property 
+//// configurable false, writable true - still you can change value of name
+///// but configurable effect comes in when you try to delte the name
+//// it does not delete
+p.name = "vas";
+console.log(p.name);  //vas
 
-p.sayName = function(){
-	console.log("name is %s", this.name);
-}
+delete p.name;
 
-p.sayName();  ////Uncaught TypeError: p.sayName is not a function because we called preventExtensions above 
-
+console.log(p.name);  //does not delete, ///vas
 
