@@ -1,51 +1,42 @@
+///////Using prototypes with constructors 
 
-// When a property is read on an object, the JavaScript engine first
-// looks for an own property with that name. If the engine finds a correctly
-// named own property, it returns that value. If no own property with that
-// name exists on the target object, JavaScript searches the [[Prototype]]
-// object instead. If a prototype property with that name exists, the value
-// of that property is returned. If the search concludes without finding a
-// property with the correct name, undefined is returned.
+//////the shared nature of protopes makes them ideal for defining methods once for all objects of a given type
 
+/////// methods tend to do the sma ething for all instances (instance properties may be different, something like sayName is same for all instances ), theere is no reason each instance needs its own set of methods 
+
+///// much more efficient to put the methods on the prototype and then use "this" to access the current instance....
 
 
-
-var obj = {};
-
-console.log(obj.toString());   //[object Object]
-
-
-
-obj.toString = function() {
-	return "[object Custom]";
+function Person(name){
+	this.name = name;
 }
 
+//// defining sayName on the prototype instead of in the constructor...
+/////because person1 and person2 are  each base references for their calls to sayName(), the "this" value is assigned to person1 and person2 respectively
+Person.prototype.sayName = function(){
+	console.log(this.name);
+};
 
-////The own property shadows the prototype property,
-//so the prototype property of the same name is no longer used
+var person1 = new Person("srini");
+var person2 = new Person("vas");
 
+console.log(person1.name);  //srini
+console.log(person2.name); //vas
 
-console.log(obj.toString());  //[object Custom]
-
-console.log("toString" in obj);  //true
-console.log(obj.hasOwnProperty("toString"));  //true
-
-///deleting own property
-console.log(delete obj.toString);  //treturns true deleted
-console.log("toString" in obj);  //true  - got from its prototype
-console.log(obj.hasOwnProperty("toString"));  //false
-
-
-
-console.log(obj.toString());  //[object Object]  //// getting from prototype again 
+person1.sayName(); //srini
+person2.sayName(); ///vas
 
 
+console.log(person1 instanceof Person);  //true
+console.log(Person instanceof Function);  //true
 
-// You cannot
-// assign a value to a prototype property from an instance. As you can see
-// in the middle section of Figure 4-2, assigning a value to toString creates a
-// new own property on the instance, leaving the property on the prototype
-// untouched.
+console.log(person1.constructor);   //function Person(mame {})
+
+console.log(person1.constructor === Person);  ///points to the constructor Person
+
+var person1proto = Object.getPrototypeOf(person1);
+
+console.log(person1proto ===Person.prototype);   ///true
 
 
-// An object with no own properties (top) has only the methods of its prototype.
+//////// above on the godammn prototype we added a method ,  which is the same godammn method for both the instances ,,, no two copies ....
