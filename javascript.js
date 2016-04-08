@@ -20,25 +20,12 @@ var person1 = new Person("srini");
 var person2 = new Person("vas");
 
 
-person1.favorites = ["coke"];
-person2.favorites = ["pepsi"];
-
-console.log(person1.favorites);  //["coke"]
-console.log(person2.favorites);  //["pepsi"]
+person1.favorites.push( "coke" );  
+person2.favorites.push( "pepsi" );
 
 
-// I expected both the log statements to print ["pepsi"] since both person1 and person2 point to the same base array favorites on the prototype, and since person2 modified it at last to ["pepsi"], I expected the both the outputs to be ["pepsi"]. 
-
-
-// You can append to an array using push and you can empty an array by setting its length to 0. As an example:
-
-person1.favorites.push( "boo" );   /// we are pushing to person1 instance// not prototype ones
-//person2.favorites.length = 0;        
-person2.favorites.push( "foo" );/// we are pushing to person1 instance// not prototype ones
-
-
-console.log(person1.favorites);  //["coke"]
-console.log(person2.favorites);  //["pepsi"]
+console.log(person1.favorites);  //["coke", "pepsi"]
+console.log(person2.favorites);  //["coke", "pepsi"]
 
 ///answer
 
