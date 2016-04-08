@@ -1,44 +1,51 @@
-////The [[prototype ]] property 
 
+// When a property is read on an object, the JavaScript engine first
+// looks for an own property with that name. If the engine finds a correctly
+// named own property, it returns that value. If no own property with that
+// name exists on the target object, JavaScript searches the [[Prototype]]
+// object instead. If a prototype property with that name exists, the value
+// of that property is returned. If the search concludes without finding a
+// property with the correct name, undefined is returned.
 
-//// an instance keeps track of its prototype through an internal propterty called [[prototype]]
-
-////this property is a pointer back to the prototype object that the instance is using
-
-//// when you create a new object using new, the constroctors prototype property is assigned to the [[prototype]] property of the new object 
-
-/// the [[prototype]] property lets multiple instances of an object type refert to the same prototype
-
-
-// var p1 = new person;
-// var p2 = new person;
-
-
-//both p1 and p2's [[prototype]] property point to the person.prototype
-
-
-/////how will you read the [[prototype ]] property
-////use Object.getPrototypeOf(obj) method 
 
 
 
 var obj = {};
 
-//this obj's [[prototype]] property shoudl point to Object.prototype
-
-
-proto = Object.getPrototypeOf(obj);
-
-console.log(proto);   //Object{}
-
-console.log(proto === Object.prototype);       //true there you go 
-////for any generic object liek this one [[prototype]] always refer to Object.prototype
-
-console.log(proto ===Object);/////false   ///proto points to Object.prototype not Object itself
-
-
-/// some JS engines support a property called __proto__ on all objects..
-///// this property allows you to both read from and write to the [[prototype]] property....
+console.log(obj.toString());   //[object Object]
 
 
 
+obj.toString = function() {
+	return "[object Custom]";
+}
+
+
+////The own property shadows the prototype property,
+//so the prototype property of the same name is no longer used
+
+
+console.log(obj.toString());  //[object Custom]
+
+console.log("toString" in obj);  //true
+console.log(obj.hasOwnProperty("toString"));  //true
+
+///deleting own property
+console.log(delete obj.toString);  //treturns true deleted
+console.log("toString" in obj);  //true  - got from its prototype
+console.log(obj.hasOwnProperty("toString"));  //false
+
+
+
+console.log(obj.toString());  //[object Object]  //// getting from prototype again 
+
+
+
+// You cannot
+// assign a value to a prototype property from an instance. As you can see
+// in the middle section of Figure 4-2, assigning a value to toString creates a
+// new own property on the instance, leaving the property on the prototype
+// untouched.
+
+
+// An object with no own properties (top) has only the methods of its prototype.
