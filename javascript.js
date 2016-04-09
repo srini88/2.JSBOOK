@@ -20,14 +20,18 @@ var person1 = new Person("srini");
 var person2 = new Person("vas");
 
 
-person1.favorites.push( "coke" );  
-person2.favorites.push( "pepsi" );
+person1.favorites = ["coke"];
+person2.favorites = ["pepsi"];
+
+console.log(person1.favorites);  //["coke"]
+console.log(person2.favorites);  //["pepsi"]
+
+console.log(Person.prototype.favorites);  //[]  still an empty araay
 
 
-console.log(person1.favorites);  //["coke", "pepsi"]
-console.log(person2.favorites);  //["coke", "pepsi"]
 
-///answer
-
-////check my question
-//http://stackoverflow.com/questions/36491463/updating-a-prototype-using-an-instance-in-javascript/36491505?noredirect=1#comment60591402_36491505
+	
+// so we are able to modify the prototype using an instance right? – Wild Widow 8 mins ago   
+// 1	up voted
+ 		
+// @WildWidow Not exactly, you can't modify the prototype through an instance , but if the prototype has any objects (including arrays) on it, you can modify those objects
