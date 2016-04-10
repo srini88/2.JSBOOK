@@ -1,37 +1,31 @@
-function Person(name){
-	this.name = name;
+
+/// constructor and prootype 
+function Person(){
+	this.sayName = function(){
+		console.log("HELLO");
+	}
 }
 
-
-// Person.prototype.sayName = function(){
-// 	console.log(this.name);
-// };
-
-//// you can store other types of data on the prototype, but be careful when using reference values.... 
-//// these godammn values are shared across instances, 
-///// one instance change value on the prototype method or something, 
-//// the other instance can see too
-
-//// now instand of sayName we will add a godammn array 
-
-Person.prototype.favorites = [];
-
-var person1 = new Person("srini");
-var person2 = new Person("vas");
+var p1 = new Person;
+var p2 = new Person;
 
 
-person1.favorites = ["coke"];
-person2.favorites = ["pepsi"];
+Person.prototype.fav = [];
+Person.prototype.obj = {};
+Person.prototype.Hello  = function(){
+	console.log("HI");
+}
 
-console.log(person1.favorites);  //["coke"]
-console.log(person2.favorites);  //["pepsi"]
+p1proto = Object.getPrototypeOf(p1);
+console.log(p1proto);  //Person {fav: Array[0], obj: Object}   -- this is Person.prototype ---not just Person - remmember 
 
-console.log(Person.prototype.favorites);  //[]  still an empty araay
+console.log(p1.constructor);  /// this constructor points to the Person...not the [[Prototype]] property 
+console.log(p1.constructor === Person);  //// trtue /// constructor check 
 
 
 
-	
-// so we are able to modify the prototype using an instance right? – Wild Widow 8 mins ago   
-// 1	up voted
- 		
-// @WildWidow Not exactly, you can't modify the prototype through an instance , but if the prototype has any objects (including arrays) on it, you can modify those objects
+console.log(Person.prototype);   ////Person {fav: Array[0], obj: Object}
+console.log(p1proto == Person.prototype);   ////true - we are pointing to the Person.prototype ... [[prototype]] points to Person.prototype
+
+
+
