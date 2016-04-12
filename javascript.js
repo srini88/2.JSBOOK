@@ -44,3 +44,8 @@ var keys1 = Object.keys(person);
 
 console.log(keys1); //["job"]  ///not printing name , because not enumerable
 
+
+////////lets see prototpye and constructor
+
+console.log(person.constructor);  ///function Object(){native shit}
+console.log(person.prototype);  ////undefined now 
