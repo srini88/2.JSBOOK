@@ -1,35 +1,38 @@
-///// what happens if you add method to prototype and the instance is sealed
-
-///sealed and frozen objects 
-/// when using Object.seal or Object.freeze on an object .. you are acting soleely on the object instances and the own propertyies
-//// you cant add new own properties or change existing own propertioes on frozen objects
-/// but you can certainly still add properties on the prototupe and continue extending those  objects 
 
 
-function Person(name) {
-	this.name = name;
-}
 
-var person1 = new Person("Nicho");
-var person2 = new Person("Greg");
-
-
-Object.freeze(person1);
-
-Person.prototype.sayHi = function(){
-	console.log("Hi");
+var person = {
+	name :"srin", 
+	age: 312
 };
 
-person1.sayBoo = function(){
-	console.log("sayBoo");
-}
-person1.sayHi();  //hi  - still outputs Hi eventhoug frozen
-person1.sayBoo();  ///Uncaught TypeError: person1.sayBoo is not a function //// cannot add on teh instance itself if frozen, but can add on the prototype
-person2.sayHi(); //hi 
+
+var obj = Object.getOwnPropertyNames(person);   ///getOwnPropertyNames returns an arraya 
+
+console.log(obj);  ////["name", "age"]
+
+console.log(Array.isArray(obj));   //true
 
 
+//// great question ---- difference between Object.getOwnPropertyNames vs Object.keys - both seem to return an array 
 
-/// when adding sayHi to the prototype, both person1 and person2 attain a new method, --- seemingly contradicting person1's frozen status 
 
-/// the [[prototype]]property is considered an own property of an instance, and whiel the property itself is frozen, the value (an object) is not
+There is a little difference. Object.getOwnPropertyNames(a) returns all own properties of the object a  irrespective of if it is enumerable or not . 
 
+Object.keys(a) returns all enumerable own properties. --if it is not enumerable it wont' return 
+
+var a = {};
+Object.defineProperties(a, {
+    one: {enumerable: true, value: 'one'},
+    two: {enumerable: false, value: 'two'},
+});
+Object.keys(a); // ["one"]
+Object.getOwnPropertyNames(a); // ["one", "two"]
+
+If you define a property without providing property attributes descriptor (meaning you don't use Object.defineProperties), for example:
+
+a.test = 21;
+then such property becomes an enumerable automatically and both methods produce the same array
+
+
+//http://stackoverflow.com/questions/22658488/object-getownpropertynames-vs-object-keys
