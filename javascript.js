@@ -1,38 +1,46 @@
 
-
-
 var person = {
-	name :"srin", 
-	age: 312
+
 };
 
+//// ddefineProperties only 2 arguments - the second one being an object
 
-var obj = Object.getOwnPropertyNames(person);   ///getOwnPropertyNames returns an arraya 
+Object.defineProperties(person, {
 
-console.log(obj);  ////["name", "age"]
+	name : {
+		value:"Srini", 
+		
+		configurable :true, 
+		writable :true
 
-console.log(Array.isArray(obj));   //true
-
-
-//// great question ---- difference between Object.getOwnPropertyNames vs Object.keys - both seem to return an array 
-
-
-There is a little difference. Object.getOwnPropertyNames(a) returns all own properties of the object a  irrespective of if it is enumerable or not . 
-
-Object.keys(a) returns all enumerable own properties. --if it is not enumerable it wont' return 
-
-var a = {};
-Object.defineProperties(a, {
-    one: {enumerable: true, value: 'one'},
-    two: {enumerable: false, value: 'two'},
+	}, 
+	job: {
+		value : "JS developer",
+		enumerable :true, 
+		configurable :true, 
+		writable :true
+	}
 });
-Object.keys(a); // ["one"]
-Object.getOwnPropertyNames(a); // ["one", "two"]
-
-If you define a property without providing property attributes descriptor (meaning you don't use Object.defineProperties), for example:
-
-a.test = 21;
-then such property becomes an enumerable automatically and both methods produce the same array
 
 
-//http://stackoverflow.com/questions/22658488/object-getownpropertynames-vs-object-keys
+console.log(person);   //Object {name: "Srini", job: "JS developer"}
+
+
+
+var keys = Object.keys(person);
+console.log(keys);  //["name", "job"]
+
+// now lets change enumerable to false on name, 
+//// we will see with getOwnpropertyNames
+var prop = Object.getOwnPropertyNames(person);
+console.log(prop);  //["name", "job"]  - brints both even though enumerable is false on Name ---- know the difference now 
+
+
+var desc = Object.getOwnPropertyDescriptor(person, "name"); ///this returns an object
+console.log(desc);   //Object {value: "Srini", writable: true, enumerable: false, configurable: true}
+
+
+var keys1 = Object.keys(person);
+
+console.log(keys1); //["job"]  ///not printing name , because not enumerable
+
