@@ -1,24 +1,56 @@
-///questions
+Imagine you don't use constructors in your code, but instead use Object.create to generate objects with a particular prototype. Your program might be architected to use no constructors at all:
 
-function Person(){}
-bill = new Person();
-ted = new Person();
+var superProto = {
+    // some super properties
+}
 
-console.log(bill.prototype===ted.prototype);
->> Returns true
+var subProto = Object.create(superProto);
+var subProto.someProp = 5;
 
-console.log(Person.prototype===bill.prototype);
->> Returns false
-
-
-
-bill doesn't have a property 'prototype' so bill.prototype is undefined, so undefined === undefined is true
+var sub = Object.create(subProto);
+Here, you don't have a constructor function to use with instanceof. You can only use subProto.isPrototypeOf(sub)
 
 
-What you really want to test is
 
-console.log(Person.prototype == bill.__proto__).
 
-That is, the 'real' prototype of bill is equal to the function prototype of its constructor, when new is used, at least.
+//////when you dont use constructor functions 
 
-It's quite unfortunate that the term prototype is used in these two ways, but if you remember that function prototype and object prototype (__proto__) are different that goes a long way toward clarifying things.
+
+
+It makes little difference when you use constructor functions.  instanceof is a little cleaner, perhaps. But when you don't...:
+
+var human = {mortal: true}
+var socrates = Object.create(human);
+human.isPrototypeOf(socrates); //=> true
+socrates instanceof human; //=> ERROR!
+So isPrototypeOf is more general.
+
+
+
+
+var neuesArray = Object.create(Array);
+
+Array.isPrototypeOf(neuesArray);
+
+true
+
+neuesArray instanceof Array
+
+false
+
+neuesArray instanceof Object
+
+true
+
+Array.isArray(neuesArray);
+
+false
+
+Array.prototype.isPrototypeOf(neuesArray);
+
+false
+
+Object.prototype.isPrototypeOf(neuesArray);
+
+true
+Do you understand my friend :) - is simple
