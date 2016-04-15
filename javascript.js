@@ -1,37 +1,24 @@
+///questions
 
-function Person(name){
-	this.name = name;
-}
+function Person(){}
+bill = new Person();
+ted = new Person();
 
+console.log(bill.prototype===ted.prototype);
+>> Returns true
 
-var p1 = new Person("srini");
-
-
-
-console.log(p1.name);
-
-var p1proto = Object.getPrototypeOf(p1);
-
-console.log(p1proto);
-console.log(Person.prototype);
-
-console.log(p1proto === Person.prototype);  //true
-
-console.log(p1.isPrototypeOf(Person));  //false
-
-console.log(Person.prototype.isPrototypeOf(p1));  //true 
-
-console.log(p1.isPrototypeOf(Person.prototype));  //false - its the other way round as above 
+console.log(Person.prototype===bill.prototype);
+>> Returns false
 
 
 
+bill doesn't have a property 'prototype' so bill.prototype is undefined, so undefined === undefined is true
 
 
-var obj = {
+What you really want to test is
 
-}
+console.log(Person.prototype == bill.__proto__).
 
-console.log(Object.prototype.isPrototypeOf(obj));   //true
+That is, the 'real' prototype of bill is equal to the function prototype of its constructor, when new is used, at least.
 
-console.log(obj.isPrototypeOf(Object.prototype));  //false - not this way, other way round 
-
+It's quite unfortunate that the term prototype is used in these two ways, but if you remember that function prototype and object prototype (__proto__) are different that goes a long way toward clarifying things.
