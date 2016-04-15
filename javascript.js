@@ -1,66 +1,27 @@
-////Imp stuff
+///////Naked object
 
-////Lets inherit from other objects......
+///you can also create objects with a null [[prototype]] via Object.create()
 
-////
+var nakedObject = Object.create(null);
 
-var person1 = {
-	name : "Nichols", 
-	sayName : function(){
-		console.log(this.name);
-	}
-};
+console.log("toString" in nakedObject);  //false
+console.log("valueOf" in nakedObject); //false
 
+///other generic Shit
+var genericObj = Object.create(Object.prototype);
 
-var person2 = Object.create(person1, {
-	name :{
-		value : "Nigga", 
-		enumerable :true, 
-		configurable : true, 
-		writable: true
-	}
-});
+console.log("toString" in genericObj);  //true
+console.log("valueOf" in genericObj); //true
 
 
-// This code creates an object, person1, with a name property and a sayName()
-// method. The person2 object inherits from person1, so it inherits both name and
-// sayName().
-
-// However, person2 is defined via Object.create(), which also defines
-// an own name property for person2.
-// This own property shadows the prototype
-// property of the same name and is used in its place. So, person1.sayName() outputs
-// "Nicholas", while person2.sayName() outputs "Greg".
-
-// Keep in mind that
-// sayName() still exists only on person1 and is being inherited by person2
-
-person1.sayName();  //Nichols
-person2.sayName();  //Nigga
+////the nakedObject in this expample is an object with no prototype chain..
+///means built in shit such as toString and valueOf arent present on the object..//this object is completely blank slate with no predefined properties...
 
 
-console.log(person1.hasOwnProperty("name"));  //true
-console.log(person2.hasOwnProperty("name"));  //true
-///above - both have their own properties "name"
-
-
-console.log(person1.hasOwnProperty("sayName"));  //true
-console.log(person2.hasOwnProperty("sayname")); //false = coz inherited from prototype person1 -- wont' show up 
-//will show up in for in though 
-console.log("sayName" in person2);  //true --- see -- 
-
-
-//console.log(person2.name);
-
-
-console.log(person1.isPrototypeOf(person2));  //true
-
-
-//remember
-// p2.proto = person1
-// p1.proto = Object.prototype
-
-//Object.proto = null 
-
-// That chain usually ends with
-// Object.prototype, whose [[Prototype]] is set to null.
+// which makes it perfect for creating a lookup hash
+// without potential naming collisions with inherited property names. There
+// aren’t many other uses for an object like this, and you can’t use it as if it
+// were inheriting from Object.prototype. For example, any time you use an
+// operator on nakedObject, you’ll just get an error along the lines of “Cannot
+// convert object to primitive value.” Still, it’s an interesting quirk of the
+// JavaScript language that you can create a prototype-less object.
