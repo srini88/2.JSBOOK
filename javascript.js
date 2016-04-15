@@ -1,63 +1,36 @@
-var a = (function(x){
-    delete x;
-    return x;
-})(1);
-
-console.log(a);  //prints 1
+/////not created with var, so can be deleted 
 
 
-//http://stackoverflow.com/questions/9053842/advanced-javascript-why-is-this-function-wrapped-in-parentheses?lq=1
-
-///mmediately-invoked function expressions can be used to avoid variable hoisting from within blocks, protect against polluting the global environment and simultaneously allow public access to methods while retaining privacy for variables defined within the function. This pattern has been referred to as a self-executing anonymous function,[2] but Ben Alman introduced the term IIFE as a more semantically accurate term for the pattern, shortly after its discussion arose on comp.lang.javascript
-
-(function() {
-  // some code
-})();
-
-// This provides a way to execute some JS code in it's own scope. It's usually used so that any variables created within the function won't affect the global scope
-
-function foo() {
-  // some code
-}
-foo();
+// A longer answer: If you declared your variable x with the var keyword at the time of first use, then delete x will not have any effect: x will still be available and hold the same value as before. As a partial workaround, you can set your variable to null or to undefined; however, this is not equivalent to deleting the variable, as shown in the example below.
 
 
-// But this requires giving a name to the function, which is not always necessary. Using a named function also means at some future point the function could be called again which might not be desirable. By using an anonymous function in this manner you ensure it's only executed once.
+b = 5;
 
 
-// by using an anonymous function in this manner you are ensuring it is only executed once....  executed only once
+console.log(b);   ///5
+
+console.log(window.b);   //////made it global   5
+
+delete(b);
+
+console.log(b);   ////b is not defined
+
+console.log("later");
 
 
-/// the below syntax is invalid   ---- Because you have to wrap the function in parens in order to make it parse as an expression. More info here
-function() {
-  // some code
-}();
 
-///The below is IIFE
-(function(){
+///if it is created with var, it cannot be deleted
 
-})();
-
-// Allows 'some code' to be executed immediately, as if it was just written inline, but also within its own scope so as not to affect the global namespace (and thus potentially interfere with or be interfered with by, other scripts).
-
-// You can pass arguments to your function just as you would a normal function, eg
-
-(function(x) {
-  // some code
-})(1);
+var c = 5;
 
 
-// Three more common wordings:
+console.log(c);   ///5
 
-// Crockford's preference - parens on the inside
-(function() {
-  console.log('Welcome to the Internet. Please follow me.');
-}());
+console.log(window.c);   //////made it global   5
 
-(function() {
-  console.log('Welcome to the Internet. Please follow me.');
-})();
+delete(c); //////no op here
 
-!function() {
-  console.log('Welcome to the Internet. Please follow me.');
-}();
+console.log(c);    ////stll prints 5 
+
+/////to delete you got to use 
+
