@@ -1,58 +1,43 @@
+///////Object inheritance 
+
+///// the simplest type of inheritance is between objects....
+/// you should specify what object should be the new objects [[prototype]]
+
+////object literals have Object.prototype set as their [[prototype]] implicitly , 
+
+///very imp
+//// you can also explicity specify [[prototype]] property with the Object.create() method 
 
 
-////modifyiong Object.prototype 
+// Object.create() acceepts two arguments 
+// first arg is the object to use for [[prototype]] in the new object 
+// /// the optional second argument is an object of property descriptors in the same format used by Object.defineProperties 
 
-// Object.prototype affects all objects...very dangerous  
+// ///
 
-Object.prototype.add = function(value) {
-return this + value;
-};
+
 var book = {
-title: "The Principles of Object-Oriented JavaScript"
-};
-
-
-///// you are getting some shit answers -
-///in all below  this  points to the  left side of period and value is the one you pass in the argunent 
-console.log(book.add(5)); // "[object Object]5"
-console.log("title".add("end")); // "titleend"
-// in a web browser
-console.log(document.add(true)); // "[object HTMLDocument]true"
-console.log(window.add(5)); // "[object Window]true"
-
-
-
-///another problem whe you add shit to Object.prototype ... that method or whatever becomes enumerable... and will show up in all your for in shit 
-
-///lets test
-
-
-
-
-
-var obj = {
-
+	title : "PHP book"
 }
 
- console.log(Object.prototype.hasOwnProperty("add"));   ////true 
+// is same as 
 
-for (prop in obj){
+/// look second argument is the property descriptors
+var book = Object.create(Object.prototype, {
+	title :{
+		value :"PHP book", 
+		configurable :true, 
+		writable : true, 
+		enumerable : true 
+	}
+});
 
-	console.log("property is :" + prop + ", " + "value is : " + obj[prop]);
-}
-///above prints 
-///property is :add, value is : function (value) {
-//////return this + value;
+// The two declarations in this code are effectively the same. The first
+// declaration uses an object literal to define an object with a single property
+// called title. That object automatically inherits from Object.prototype,
+// and the property is set to be configurable, enumerable, and writable by
+// default. The second declaration takes the same steps but does so explicitly
+// using Object.create(). The resulting book object from each declaration
+// behaves the exact same way
 
-
-///also 
-
-// Object.keys(a) returns all enumerable own properties. --if it is not enumerable it wont' return 
-
-var propKeys = Object.keys(obj);
-
-console.log(propKeys);  ///empty array   ////here it is not returning becuase it is not an own property 
-
-
-
-
+///// ususally you dont write code that inherits from Object.prototype directly, because you got that shit by default...
