@@ -1,52 +1,45 @@
+///in traditional oo languages, classes inherit properties from other classess....
+
+// In JS, inheritance,  occurs betweenobjects with no class like structure defining the relationship
+// through rptotypes
+
+// prototype chaining and Object.prototype
 
 
-//////prototyepes also allow you to modify the builtin objects that come standard in JS engine.... 
-/////adding a new method for use on all strings is as simple as modifying String.prototype
+// Javascriopt built in approach for inheritance is called prototype chaining or prototypal inheritance 
+
+// prototype properties are automatically available on object instances...
+// which is form of inheritance...
 
 
-///This message is derived from String... this message automatically has access to the caps method through the prototype
-
-
-var message = "hello world";
-
-console.log(message);
-
-//console.log(message typeof String);    ///wrong syntax   --- remmber this kind of syntax is for instanceof
-
-console.log(typeof message);   //string
-
-
-/////Lets put shit on prototype of the built in itself 
-/////basically modifying the  primitive wrapper type prototype
+// because the prototype is also an object, it has its own prototype and inherits from that... this is the prototype chain ....
 
 
 
-String.prototype.capitalize = function(str){
-	return str.toUpperCase();
-}
+// all generic shit inherit from Object.prototype
 
-//console.log(capitalize(message));  ///wrong syntax -- have to call on object message...
-console.log(message.capitalize(message));  // HELLO WORLD
+// any object defined via an object literal has its [[prototype ]] set to object.prototype 
 
-/////you are passing in message to capitalizede  - which you dont need..
-////instead dont pass message and have capitalize use this like below 
+var book  = {
+	title: "HEE"    ///no semicolon here..just one propertty
+};
 
 
+var bookproto = Object.getPrototypeOf(book);
 
-String.prototype.caps = function (){
-	return this.toUpperCase();
-}
+console.log(bookproto === Object.prototype);  ///true 
 
-console.log(message.caps());  ///HELLO WORLD
+// means book automatically receives methods from Object.prototype 
 
+// Shit that is on Object.prototype 
 
-/////fun to modify builtin objects to experiment, 
+// hasOwnProperty(property)
 
+// propertyIsEnumerable(prop
 
-/////from recap ....The constructor
-// property is actually defined on the prototype because it is shared among
-// object instances.
+// 	getPrototypeOf(Object))
+// valueOf()
 
-// what saying is 
+// toString()
 
-// Person.prototype.constructor = Person;
+These methods appoear on all the objects through inheritance....
