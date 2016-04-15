@@ -1,27 +1,46 @@
-///////Naked object
+////Constructor inheritance 
 
-///you can also create objects with a null [[prototype]] via Object.create()
+///object inheritance in JS is also the basis of constructor inheritance 
 
-var nakedObject = Object.create(null);
-
-console.log("toString" in nakedObject);  //false
-console.log("valueOf" in nakedObject); //false
-
-///other generic Shit
-var genericObj = Object.create(Object.prototype);
-
-console.log("toString" in genericObj);  //true
-console.log("valueOf" in genericObj); //true
+///every godammn function has a prototype property that can be modified or replaced..
 
 
-////the nakedObject in this expample is an object with no prototype chain..
-///means built in shit such as toString and valueOf arent present on the object..//this object is completely blank slate with no predefined properties...
+///when you write the below function , 
+
+function Person(){
+
+}
+
+///JS engine does this behind the scenes
+////remember sets the constructor 
+Person.prototype = Object.create(Object.prototype, {
+	constructor :{
+		value : Person,    ///see the value Person
+		configurable: true,
+enumerable: true,
+writable :true
+
+	}
+});
+//This code sets the construcots prototype property to an object that inherits from Object.prototype, which means any instances of Person also inherit from Object.prototype...
 
 
-// which makes it perfect for creating a lookup hash
-// without potential naming collisions with inherited property names. There
-// aren’t many other uses for an object like this, and you can’t use it as if it
-// were inheriting from Object.prototype. For example, any time you use an
-// operator on nakedObject, you’ll just get an error along the lines of “Cannot
-// convert object to primitive value.” Still, it’s an interesting quirk of the
-// JavaScript language that you can create a prototype-less object.
+// Person is a subtype of Object and Object is a supertype of Person
+
+
+///other shit
+var obj = {
+
+}
+
+
+console.log(obj.prototype);  ///undefined 
+//// where as when you use goadmman function
+console.log(Person.prototype);   /////Person{} with triangle
+
+
+console.log(Object.prototype.isPrototypeOf(Person));  ///true  - not sure about this
+
+console.log(Object.prototype.isPrototypeOf(Person.prototype));  ///true  - this as expected  
+
+console.log(Object.prototype);  //lots of shit
