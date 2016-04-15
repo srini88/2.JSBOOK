@@ -1,56 +1,66 @@
-Imagine you don't use constructors in your code, but instead use Object.create to generate objects with a particular prototype. Your program might be architected to use no constructors at all:
+////Imp stuff
 
-var superProto = {
-    // some super properties
-}
+////Lets inherit from other objects......
 
-var subProto = Object.create(superProto);
-var subProto.someProp = 5;
+////
 
-var sub = Object.create(subProto);
-Here, you don't have a constructor function to use with instanceof. You can only use subProto.isPrototypeOf(sub)
-
-
-
-
-//////when you dont use constructor functions 
+var person1 = {
+	name : "Nichols", 
+	sayName : function(){
+		console.log(this.name);
+	}
+};
 
 
-
-It makes little difference when you use constructor functions.  instanceof is a little cleaner, perhaps. But when you don't...:
-
-var human = {mortal: true}
-var socrates = Object.create(human);
-human.isPrototypeOf(socrates); //=> true
-socrates instanceof human; //=> ERROR!
-So isPrototypeOf is more general.
-
-
+var person2 = Object.create(person1, {
+	name :{
+		value : "Nigga", 
+		enumerable :true, 
+		configurable : true, 
+		writable: true
+	}
+});
 
 
-var neuesArray = Object.create(Array);
+// This code creates an object, person1, with a name property and a sayName()
+// method. The person2 object inherits from person1, so it inherits both name and
+// sayName().
 
-Array.isPrototypeOf(neuesArray);
+// However, person2 is defined via Object.create(), which also defines
+// an own name property for person2.
+// This own property shadows the prototype
+// property of the same name and is used in its place. So, person1.sayName() outputs
+// "Nicholas", while person2.sayName() outputs "Greg".
 
-true
+// Keep in mind that
+// sayName() still exists only on person1 and is being inherited by person2
 
-neuesArray instanceof Array
+person1.sayName();  //Nichols
+person2.sayName();  //Nigga
 
-false
 
-neuesArray instanceof Object
+console.log(person1.hasOwnProperty("name"));  //true
+console.log(person2.hasOwnProperty("name"));  //true
+///above - both have their own properties "name"
 
-true
 
-Array.isArray(neuesArray);
+console.log(person1.hasOwnProperty("sayName"));  //true
+console.log(person2.hasOwnProperty("sayname")); //false = coz inherited from prototype person1 -- wont' show up 
+//will show up in for in though 
+console.log("sayName" in person2);  //true --- see -- 
 
-false
 
-Array.prototype.isPrototypeOf(neuesArray);
+//console.log(person2.name);
 
-false
 
-Object.prototype.isPrototypeOf(neuesArray);
+console.log(person1.isPrototypeOf(person2));  //true
 
-true
-Do you understand my friend :) - is simple
+
+//remember
+// p2.proto = person1
+// p1.proto = Object.prototype
+
+//Object.proto = null 
+
+// That chain usually ends with
+// Object.prototype, whose [[Prototype]] is set to null.
