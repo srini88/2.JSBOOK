@@ -1,39 +1,52 @@
-/////not created with var, so can be deleted 
 
 
-// A longer answer: If you declared your variable x with the var keyword at the time of first use, then delete x will not have any effect: x will still be available and hold the same value as before. As a partial workaround, you can set your variable to null or to undefined; however, this is not equivalent to deleting the variable, as shown in the example below.
+//////prototyepes also allow you to modify the builtin objects that come standard in JS engine.... 
+/////adding a new method for use on all strings is as simple as modifying String.prototype
 
 
-///setting to null makes the garbage collector  clean it
+///This message is derived from String... this message automatically has access to the caps method through the prototype
 
 
-b = 5;
+var message = "hello world";
+
+console.log(message);
+
+//console.log(message typeof String);    ///wrong syntax   --- remmber this kind of syntax is for instanceof
+
+console.log(typeof message);   //string
 
 
-console.log(b);   ///5
-
-console.log(window.b);   //////made it global   5
-
-delete(b);
-
-console.log(b);   ////b is not defined
-
-console.log("later");
+/////Lets put shit on prototype of the built in itself 
+/////basically modifying the  primitive wrapper type prototype
 
 
 
-///if it is created with var, it cannot be deleted
+String.prototype.capitalize = function(str){
+	return str.toUpperCase();
+}
 
-var c = 5;
+//console.log(capitalize(message));  ///wrong syntax -- have to call on object message...
+console.log(message.capitalize(message));  // HELLO WORLD
+
+/////you are passing in message to capitalizede  - which you dont need..
+////instead dont pass message and have capitalize use this like below 
 
 
-console.log(c);   ///5
 
-console.log(window.c);   //////made it global   5
+String.prototype.caps = function (){
+	return this.toUpperCase();
+}
 
-delete(c); //////no op here
+console.log(message.caps());  ///HELLO WORLD
 
-console.log(c);    ////stll prints 5 
 
-/////to delete you got to use 
+/////fun to modify builtin objects to experiment, 
 
+
+/////from recap ....The constructor
+// property is actually defined on the prototype because it is shared among
+// object instances.
+
+// what saying is 
+
+// Person.prototype.constructor = Person;
