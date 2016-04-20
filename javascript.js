@@ -1,54 +1,60 @@
-//////object inheritance   page 69
-
-///simplest inheritance is between objects...
-
-what object should be the new objects [[prototype]]
-
-object literals also have Object.prototype set as their [[Prototype]] implicitly...
+///inhertance between two different objects...
 
 
-/////Object.create to explicity specify [[prototype]]
-
-you can also explicity specify [[Prototype]] with the Object.create() method 
-
-///other shit
-///read this http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/
-
-///http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/
-
-// function hello(thing) {  
-//   console.log("Hello " + thing);
-// }
-
-// // this:
-// hello("world")
-
-// // desugars to:
-// hello.call(window, "world"); 
-
-// The short version is: a function invocation like fn(...args) is the same as fn.call(window [ES5-strict: undefined], ...args).
-
-//Object.create
-
-Object.create accepts two arguments...
-
-// the first object is the object to use for [[Prototype]]  (prototype of what )  in the new object.....2nd argument is an object of property descriptors in the same format used by Object.defineProperties()
-
-
-var book = {
-title: "The Principles of Object-Oriented JavaScript"
+var person1 = {
+name : "srini",
+sayName : function(){
+	console.log(this.name);
+}
 };
 
-///is same as 
+///  right side is big one... person1 is the prototype of person2 
+var person2 = Object.create(person1, {
 
-var book = Object.create(Object.prototype, {
-
-	title : {
-		value : "The Principles of Object-Oriented JavaScript",
-		enumerable :true, 
-		writable : true,
-		configurable : true
+	name :{
+		value : "Vas", 
+		configurable : true,
+		enumerable : true, 
+		writable : true
 	}
 });
 
-//The first one uses object literal... which automatically inherits from object.prototype....
+
+person1.sayName(); //srini
+person2.sayName();  //vas  - see person2 does not have sayName it got inhertited from person1 ...
+
+console.log(person1.hasOwnProperty("sayName"));  //true
+console.log(person1.isPrototypeOf(person2));   ///true ////left one is big..inside is small
+
+console.log(person2.isPrototypeOf(person1));  //false/ ///not reverse like this
+
+console.log(person2.hasOwnProperty("sayName"));   //false///inherited from right...does not contain it...
+
+
+var prop;
+for (prop in person2){
+	console.log("prop is: " + prop  + "  value is: " + person2[prop]);
+}
+
+//for in prints both own properties and prototype properties...you got sayName below...
+
+// prop is: name  value is: Vas
+// javascript.js:36 prop is: sayName  value is: function (){
+// 	console.log(this.name);
+// }
+
+var arr = Object.getOwnPropertyNames(person2);  //only fetches own properties
+console.log(arr);  //got just ["name"] here...
+
+
+////remmember this shit....
+
+console.log(Object.prototype.__proto__ === null);   /////true //always Object.prototype ka proto points to nullllll
+
+console.log(person2.__proto__);   ////points to person1 ///Object {name: "srini"}
+
+
+console.log(person2.__proto__ === person1);   //true 
+
+// That chain usually ends with
+// Object.prototype, whose [[Prototype]] is set to null.
