@@ -1,46 +1,64 @@
-////Constructor inheritance 
-
-///object inheritance in JS is also the basis of constructor inheritance 
-
-///every godammn function has a prototype property that can be modified or replaced..
 
 
-///when you write the below function , 
-
-function Person(){
-
+function Drink(drink){
+	this.drink = drink;
 }
 
-///JS engine does this behind the scenes
-////remember sets the constructor 
-Person.prototype = Object.create(Object.prototype, {
-	constructor :{
-		value : Person,    ///see the value Person
-		configurable: true,
-enumerable: true,
-writable :true
+/// not Drink.getDrink - got to use prototype
+Drink.prototype.getDrink = function(){
+	return this.drink;
+}
 
+var coke = new Drink("coke");
+
+
+console.log(coke.getDrink());  //coke --- accessible on the coke instance
+console.log(coke);  
+
+console.log(coke.constructor);  ///points to Drink
+
+console.log(coke.prototype);   //undefined..didn;t add shit here
+
+
+console.log(Drink.prototype.isPrototypeOf(coke));  ////true -- very imp 
+
+console.log(Drink.prototype.isPrototypeOf(new Drink));  ////true 
+
+cokeProto = Object.getPrototypeOf(coke);
+
+console.log(Drink.prototype === cokeProto);   //true
+
+console.log(Drink.prototype === Drink);  //false
+
+console.log(Drink.constructor);  //native function shit
+
+
+////since coke is an instance of Drink, and if you messup Drink prototype like an object shit --- it messes up Drink prorotype...when you do coke.constructor --- it does not point to Drink --- it points to Object instead -- very important 
+//lets see///  
+
+function Dri (dri){
+	this.dri = dri;
+}
+
+Dri.prototype = {
+
+	getDri : function(){
+		return this.dri;
 	}
-});
-//This code sets the construcots prototype property to an object that inherits from Object.prototype, which means any instances of Person also inherit from Object.prototype...
-
-
-// Person is a subtype of Object and Object is a supertype of Person
-
-
-///other shit
-var obj = {
-
 }
 
-
-console.log(obj.prototype);  ///undefined 
-//// where as when you use goadmman function
-console.log(Person.prototype);   /////Person{} with triangle
+var pepsi = new Dri("pepsi");
 
 
-console.log(Object.prototype.isPrototypeOf(Person));  ///true  - not sure about this
+console.log(pepsi.getDri());   //pepsi 
+console.log(pepsi.constructor);  ///see the fucking difference...points to Object shit... instead of Dri from where it got inherited...because you messed up prototype object 
 
-console.log(Object.prototype.isPrototypeOf(Person.prototype));  ///true  - this as expected  
+console.log(pepsi.constructor === Object);  //true 
 
-console.log(Object.prototype);  //lots of shit
+
+
+
+
+
+
+
