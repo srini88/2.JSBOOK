@@ -1,54 +1,83 @@
-////2nd fucking way...
+/////Constructor stealing...
 
-Square.prototype does not actaully need to be overwritten with a Rectangle object though...
+///because inherittance is accomplised through prottype chains in JS, you dont need to call an object's supertype constructor....
 
-Square.prototype = new Rectangle;   //saying not required./
+///if you do want to call the supertype constructor from the subtype construcot , then you need to take advantage of how JS functions work..
 
-//however for inheritance to happen Square.prototype needs to somehow linkk to Rectangle.prototype in order for inheritance to happen....
+///use call and apply...which allow functions to be called with a different this value.... //this is called constructor stealing...
 
-//2nd way..simplify the shit using Object.create() once again...
+///you basically call the supertype construcotr from the subtype constructor using either call or apply to pass in the newly createed object...
 
-// inherits from Rectangle
-function Square(size) {
-	this.length = size;
-	this.width = size;
+
+///in effect, you are stealing the supertype construcor for your own object...
+
+
+function Rectangle(length, width){
+	this.length = length;
+	this.width = width;
 }
 
-//do this shit instead of new Rectangle and all that...
+Rectangle.prototype.getArea = function() {
+return this.length * this.width;
+};
+Rectangle.prototype.toString = function() {
+return "[Rectangle " + this.length + "x" + this.width + "]";
+};
+
+///before 
+// function Square(size){
+//  +	this.length = size;
+//  +	this.width  = size;
+//  +}
+
+///now 
+//inherit from Rectangle 
+
+function Square(size){
+	Rectangle.call(this, size, size);
+	//optiinal : add new properties or override existing ones here..
+}
 
 Square.prototype = Object.create(Rectangle.prototype, {
-	constructor: {
-		configurable: true,
-		enumerable: true,
-		value: Square,   ///remmember very imp
-		writable: true
-	}
+							constructor: {
+							configurable: true,
+							enumerable: true,
+							value: Square,
+							writable: true
+							}
 });
-
-//in this versition Square.prototype is overwritten with a new object that inherits from Rectangle.prototype and the Rectangle construcotr is never called...
-
-////this code behaves exactly the same as the 1st way...
-///the prototype chain remains intact.....
-
-// Always make sure that you overwrite the prototype before adding properties to it,
-// or you will lose the added methods when the overwrite happens.
-
-///awesome above sentence...
-//so if you do this shit 
 
 Square.prototype.toString = function() {
 return "[Square " + this.length + "x" + this.width + "]";
 };
 
-// and then try to inherit...
-Square.prototype = Object.create(Rectangle.prototype, {
-	constructor: {
-		configurable: true,
-		enumerable: true,
-		value: Square,   ///remmember very imp
-		writable: true
-	}
-});
+var square = new Square(6);
+console.log(square.length); // 6
+console.log(square.width); // 6
+console.log(square.getArea()); // 36
 
-///you fucking lost toString and all the added fucking methods on the Square.prototype..... whioch we do not want...
-///so override first and add the methodds later..
+
+// The  Square constructor calls the Rectangle constructor and passes in
+// this as well as size two times (once for length and once for width). Doing
+// so creates the length and width properties on the new object (square) and makes
+// each equal to size.
+
+////these lenght and width are created on the square instance...
+
+ console.log(square.hasOwnProperty("length"));  //true
+ console.log(square.hasOwnProperty("width")); //true
+ console.log(square.hasOwnProperty("getArea"));  //false
+
+  console.log(Rectangle.prototype.hasOwnProperty("getArea"));  //true
+
+//   This is the way to avoid redefining properties from a
+// constructor from which you want to inherit. You can add new properties
+// or override existing ones after applying the super type constructor.
+
+// This two-step process is useful when you need to accomplish inheritance
+// between custom types. You’ll always need to modify a constructor’s
+// prototype, and you may also need to call the supertype constructor from
+// within the subtype constructor. Generally, you’ll modify the prototype
+// for method inheritance and use constructor stealing for properties. This
+// approach is typically referred to as pseudoclassical inheritance because it
+// mimics classical inheritance from class-based languages.
