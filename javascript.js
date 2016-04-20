@@ -1,64 +1,54 @@
+//////object inheritance   page 69
+
+///simplest inheritance is between objects...
+
+what object should be the new objects [[prototype]]
+
+object literals also have Object.prototype set as their [[Prototype]] implicitly...
 
 
-function Drink(drink){
-	this.drink = drink;
-}
+/////Object.create to explicity specify [[prototype]]
 
-/// not Drink.getDrink - got to use prototype
-Drink.prototype.getDrink = function(){
-	return this.drink;
-}
+you can also explicity specify [[Prototype]] with the Object.create() method 
 
-var coke = new Drink("coke");
+///other shit
+///read this http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/
 
+///http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/
 
-console.log(coke.getDrink());  //coke --- accessible on the coke instance
-console.log(coke);  
+// function hello(thing) {  
+//   console.log("Hello " + thing);
+// }
 
-console.log(coke.constructor);  ///points to Drink
+// // this:
+// hello("world")
 
-console.log(coke.prototype);   //undefined..didn;t add shit here
+// // desugars to:
+// hello.call(window, "world"); 
 
+// The short version is: a function invocation like fn(...args) is the same as fn.call(window [ES5-strict: undefined], ...args).
 
-console.log(Drink.prototype.isPrototypeOf(coke));  ////true -- very imp 
+//Object.create
 
-console.log(Drink.prototype.isPrototypeOf(new Drink));  ////true 
+Object.create accepts two arguments...
 
-cokeProto = Object.getPrototypeOf(coke);
-
-console.log(Drink.prototype === cokeProto);   //true
-
-console.log(Drink.prototype === Drink);  //false
-
-console.log(Drink.constructor);  //native function shit
+// the first object is the object to use for [[Prototype]]  (prototype of what )  in the new object.....2nd argument is an object of property descriptors in the same format used by Object.defineProperties()
 
 
-////since coke is an instance of Drink, and if you messup Drink prototype like an object shit --- it messes up Drink prorotype...when you do coke.constructor --- it does not point to Drink --- it points to Object instead -- very important 
-//lets see///  
+var book = {
+title: "The Principles of Object-Oriented JavaScript"
+};
 
-function Dri (dri){
-	this.dri = dri;
-}
+///is same as 
 
-Dri.prototype = {
+var book = Object.create(Object.prototype, {
 
-	getDri : function(){
-		return this.dri;
+	title : {
+		value : "The Principles of Object-Oriented JavaScript",
+		enumerable :true, 
+		writable : true,
+		configurable : true
 	}
-}
+});
 
-var pepsi = new Dri("pepsi");
-
-
-console.log(pepsi.getDri());   //pepsi 
-console.log(pepsi.constructor);  ///see the fucking difference...points to Object shit... instead of Dri from where it got inherited...because you messed up prototype object 
-
-console.log(pepsi.constructor === Object);  //true 
-
-
-
-
-
-
-
-
+//The first one uses object literal... which automatically inherits from object.prototype....
