@@ -1,5 +1,3 @@
-///look at filter...
-
 
 var animals = [
 {name :"Fluffkins", species : 'rabbit'},
@@ -9,20 +7,21 @@ var animals = [
 {name :"Doge", species : 'dog'}
 ];
 
-//functions you send into another function is called cb function..
-///it expects the cb to return etierh true or false..
-///return the new filterd array..
+
+///funcitons that take other functions as arguments - this is higher order functiosn....
+
+///map ///////// unlike filter - it does not throuw objects away..instead it transforms them..
+//// we want to get an array of all the names of all animals...
 
 
-var dogs = animals.filter(cb);
-function cb(animal){
-	return animal.species === "dog";  //just one line of logic
+///lets use a for loop, get all names of animals.
+
+var names = [];
+for (var i = 0; i < animals.length ; i++){
+
+	names.push(animals[i].name);
 }
-console.log(dogs);  //you get what you want here..
 
-////cb and filter compose togeteher...
-
-
-
+console.log(names);  //["Fluffkins", "Retriever", "Muffy", "bunny", "Doge"]
 
 
