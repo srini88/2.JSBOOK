@@ -1,26 +1,26 @@
-////https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+///make Adder
 
+///
 
-////readuibg mozilla documentation on closures...
+function makeAdder(x){
 
-
-///Closure
-
-
-function makeFunc(){
-
-	var name = "Mozilla";
-
-	function displayName(){
-		console.log(name);
-	}
-	return displayName;  //makeFunc Retrurning displayName
+	return function(y){
+		return x+y;
+	};    ///returning the function ,, that's why semicolon
 }
 
-var myFunc = makeFunc();
-myFunc();  ///Mozilla
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
 
-///myFunc is a closure....
-////closure combines two things...a function and the environmemt in which it was created...
-///the environment consists of any local variables that were in scope at the time the closure was created...
-///in our case myFunc is a closure that incorporates both the displayName and the "Mozilla" string that existed when the closure was created..
+
+console.log(add5(2));  //7
+console.log(add5(4));  //9
+
+console.log(add10(2));  //12
+console.log(add10(4));  //14
+
+// In this example, we have defined a function makeAdder(x) which takes a single argument x and returns a new function. The function it returns takes a single argument y, and returns the sum of x and y.
+
+// In essence, makeAdder is a function factory — it creates functions which can add a specific value to their argument. In the above example we use our function factory to create two new functions — one that adds 5 to its argument, and one that adds 10.
+
+// add5 and add10 are both closures. They share the same function body definition, but store different environments. In add5's environment, x is 5. As far as add10 is concerned, x is 10.
