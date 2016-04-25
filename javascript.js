@@ -4,23 +4,23 @@
 ////readuibg mozilla documentation on closures...
 
 
-///lexical scope
+///Closure
 
-function init(){
 
-	var name = "mozilla";
+function makeFunc(){
 
-	function displayName(){   //is the closure as it rememebrs name
+	var name = "Mozilla";
+
+	function displayName(){
 		console.log(name);
 	}
-	displayName();
+	return displayName;  //makeFunc Retrurning displayName
 }
 
-init();  //mozilla
+var myFunc = makeFunc();
+myFunc();  ///Mozilla
 
-// Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure 'remembers' the environment in which it was created.
-
-
-// isplayName() has no local variables of its own, however it has access to the variables of outer functions and so can use the variable name declared in the parent function.
-
-// This is an example of lexical scoping: in JavaScript, the scope of a variable is defined by its location within the source code (it is apparent lexically) and nested functions have access to variables declared in their outer scope.
+///myFunc is a closure....
+////closure combines two things...a function and the environmemt in which it was created...
+///the environment consists of any local variables that were in scope at the time the closure was created...
+///in our case myFunc is a closure that incorporates both the displayName and the "Mozilla" string that existed when the closure was created..
