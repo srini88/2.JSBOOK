@@ -1,16 +1,24 @@
+////looking at reduce...
 
-var animals = [
-{name :"Fluffkins", species : 'rabbit'},
-{name :"Retriever", species : 'dog'},
-{name :"Muffy", species : 'rabbit'},
-{name :"bunny", species : 'rabbit'},
-{name :"Doge", species : 'dog'}
+////another higher order function reduce...
+
+///what is reduce?
+///reduce is the multitool of transformations...
+
+
+
+var orders = [
+	{amount : 250},
+	{amount : 150},
+	{amount : 250},
+	{amount : 550}
 ];
 
-///the cb will be passed each item in the animal array..
+//traditional way...
 
-var names = animals.map(function (animal){
-	return animal.name +  " is a " + animal.species;  
+var totalAmount = 0;
+for (var i=0 ; i <orders.length ; i++){
+	totalAmount += orders[i].amount;
+}
 
-});
-// console.log(names);  ["Fluffkins is a rabbit", "Retriever is a dog", "Muffy is a rabbit", "bunny is a rabbit", "Doge is a dog"]
+console.log(totalAmount);  //1200
