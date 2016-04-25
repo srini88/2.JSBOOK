@@ -22,14 +22,17 @@ greetMe();  //hello patrick bateman!  //this has access to outer variable scope.
 // Javascript Closure tutorial ( Closures Explained )
 // ///techsith
 
+//2/putting passed outside...
+///this is a godammn closure as well....
+///variables defined outside the fn are automatically available inside...
+////as JS uses lexical scoping... it does it by means of a closure..
+////any function where you using a variable from outside the scope are closures...
 
-
-var addTo = function (passed){
+var passed = 3;
+var addTo = function (){
 	var inner = 2;
 	return passed + inner;
 };
 
-console.log(addTo(3));  //5
+console.log(addTo());  // still 5..
 
-
-///putting passed outside...
