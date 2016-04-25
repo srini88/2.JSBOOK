@@ -7,21 +7,14 @@ var animals = [
 {name :"Doge", species : 'dog'}
 ];
 
+///the cb will be passed each item in the animal array..
 
-///funcitons that take other functions as arguments - this is higher order functiosn....
+var names = animals.map(function (animal){
 
-///map ///////// unlike filter - it does not throuw objects away..instead it transforms them..
-//// we want to get an array of all the names of all animals...
+//filter only ture or false, whether item to be included in array or not..
+///map expects we  return a new array. ..a transformed object...
+///using map toreturn a subset of object...
+	return animal.name;   //very simple
 
-
-///lets use a for loop, get all names of animals.
-
-var names = [];
-for (var i = 0; i < animals.length ; i++){
-
-	names.push(animals[i].name);
-}
-
-console.log(names);  //["Fluffkins", "Retriever", "Muffy", "bunny", "Doge"]
-
-
+});
+console.log(names);  //["Fluffkins", "Retriever", "Muffy", "bunny", "Doge"]  ///WHATTTTTTT
