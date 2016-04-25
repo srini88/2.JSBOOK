@@ -12,17 +12,9 @@
 // Here's how to define some public functions that can access private functions and variables, using closures which is also known as the module pattern:
 
 
-var counter = (function(){
-
-	//creted a single env which is shared by 3 fns...counter.increment, counter.decrement and counter.value...
-
-	//the shared env is in the body of an anon function, which is executed as soon as it has been defined.....
-	///privateCounter and a fun changeBy are private items...
-	///cannot be accessed directly from outside the anon fn...
-	///they must be acessed by 3 public fns that are returned from the anonymous wrapper...
+var makeCounter = (function(){
 
 
-	//these 3 public fns are closures that share the same env....(due to lexical scoping)
 	var privateCounter = 0;
 	//console.log(privateCounter);
 	function changeBy(val){
@@ -44,12 +36,17 @@ var counter = (function(){
 	};
 })();
 
+////see here using anon func for make counter...only executed once...
+/////so counter1 and counter2 deal with the same shit....
+///look at next commit to make the counters different...
+///for that, you should not use anon fun....v v imp
 
-
-console.log(counter);   //returns an obj with dec, inc and value
-console.log(counter.value());  //0
-counter.increment();
-counter.increment();
-console.log(counter.value());  //2
-counter.decrement();
-console.log(counter.value());   //1
+var counter1 = makeCounter;
+var counter2 = makeCounter;
+console.log(counter1.value()); /* Alerts 0 */
+counter1.increment();
+counter1.increment();
+console.log(counter1.value()); /* Alerts 2 */
+counter1.decrement();
+console.log(counter1.value()); /* Alerts 1 */
+console.log(counter2.value()); /* Alerts 1 */
