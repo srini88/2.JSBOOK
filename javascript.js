@@ -10,11 +10,7 @@ var animals = [
 ///the cb will be passed each item in the animal array..
 
 var names = animals.map(function (animal){
-
-//filter only ture or false, whether item to be included in array or not..
-///map expects we  return a new array. ..a transformed object...
-///using map toreturn a subset of object...
-	return animal.name;   //very simple
+	return animal.name +  " is a " + animal.species;  
 
 });
-console.log(names);  //["Fluffkins", "Retriever", "Muffy", "bunny", "Doge"]  ///WHATTTTTTT
+// console.log(names);  ["Fluffkins is a rabbit", "Retriever is a dog", "Muffy is a rabbit", "bunny is a rabbit", "Doge is a dog"]
