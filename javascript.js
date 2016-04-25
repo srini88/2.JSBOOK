@@ -1,20 +1,26 @@
-var addTo = function(passed){
-
-	var add = function(inner){
-		return passed + inner;
-	};
-
-	return add;   ///////our addTo fn returns the function add
-};
-
-//console.dir(addTo(3));   //function add{}  ///returns add fn..with access to passed....which is being presereved...
+////https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
 
-var addFour = addTo(3);   ///you are preserving this 3 value in all the subsequent function calls
+////readuibg mozilla documentation on closures...
 
-console.log(addFour(4)); //returns 7
 
-console.log(addTo(3)(4));  //this also returns 7
+///lexical scope
 
-///closures are functions with preserved data....
+function init(){
 
+	var name = "mozilla";
+
+	function displayName(){   //is the closure as it rememebrs name
+		console.log(name);
+	}
+	displayName();
+}
+
+init();  //mozilla
+
+// Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure 'remembers' the environment in which it was created.
+
+
+// isplayName() has no local variables of its own, however it has access to the variables of outer functions and so can use the variable name declared in the parent function.
+
+// This is an example of lexical scoping: in JavaScript, the scope of a variable is defined by its location within the source code (it is apparent lexically) and nested functions have access to variables declared in their outer scope.
