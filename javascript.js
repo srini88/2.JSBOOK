@@ -1,35 +1,34 @@
+///look at filter...
 
 
-////Bear from Kyle channel..... Prototypal inheritance...
+var animals = [
+{name :"Fluffkins", species : 'rabbit'},
+{name :"Retriever", species : 'dog'},
+{name :"Muffy", species : 'rabbit'},
+{name :"bunny", species : 'rabbit'},
+{name :"Doge", species : 'dog'}
+];
 
-///constructor function
-function Bear(type){
-	this.type = type;
+//functions you send into another function is called cb function..
+///it expects the cb to return etierh true or false..
+///return the new filterd array..
+
+
+var dogs = animals.filter(cb);
+
+
+function cb(animal){
+	
+	return false;
+
+	//console.log(animal); 
+	//Object {name: "Fluffkins", species: "rabbit"}
+	//Object {name: "Retriever", species: "dog"}....
 }
-
-Bear.prototype.growl = function(){
-	console.log(this.type + " says grr");
-}
-
-function Grizzly(){
-//so add this
-
-Bear.call(this, "grizzly");
-
-}
-
-//Grizzly.prototype = Bear.prototype  ///this is wrong...this is making it equal bear...we need a new object that is based off of prototype
+console.log(dogs);  //by returning false in the cb function...you get an empty array in the dog [] 
 
 
-Grizzly.prototype = Object.create(Bear.prototype);  //everythign we have on Bear.prototype , we gonna apply to Grizzly proottpe
 
-
-var grizzly = new Grizzly;
-var polar = new Bear("polar");
-console.log(grizzly.growl());  ///this is the problem ...here it prints undefined says grr  ---- why? 
-/////in Grizzly we are not callign ght econstructor of the Bear type..
-
-///now it says Grizzly says Grr 
 
 
 
