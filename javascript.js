@@ -15,18 +15,12 @@ var animals = [
 
 
 var dogs = animals.filter(cb);
-
-
 function cb(animal){
-	
-	return false;
-
-	//console.log(animal); 
-	//Object {name: "Fluffkins", species: "rabbit"}
-	//Object {name: "Retriever", species: "dog"}....
+	return animal.species === "dog";  //just one line of logic
 }
-console.log(dogs);  //by returning false in the cb function...you get an empty array in the dog [] 
+console.log(dogs);  //you get what you want here..
 
+////cb and filter compose togeteher...
 
 
 
