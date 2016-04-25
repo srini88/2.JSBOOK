@@ -1,26 +1,55 @@
-///make Adder
-
-///
-
-function makeAdder(x){
-
-	return function(y){
-		return x+y;
-	};    ///returning the function ,, that's why semicolon
-}
-
-var add5 = makeAdder(5);
-var add10 = makeAdder(10);
 
 
-console.log(add5(2));  //7
-console.log(add5(4));  //9
+// Languages such as Java provide the ability to declare methods private, meaning that they can only be called by other methods in the same class.
 
-console.log(add10(2));  //12
-console.log(add10(4));  //14
+// ///////js does not have native way to make shit private...
+// ////emulate private methods using closures...
+// ////learn module pattern..
 
-// In this example, we have defined a function makeAdder(x) which takes a single argument x and returns a new function. The function it returns takes a single argument y, and returns the sum of x and y.
 
-// In essence, makeAdder is a function factory — it creates functions which can add a specific value to their argument. In the above example we use our function factory to create two new functions — one that adds 5 to its argument, and one that adds 10.
+// JavaScript does not provide a native way of doing this, but it is possible to emulate private methods using closures. Private methods aren't just useful for restricting access to code: they also provide a powerful way of managing your global namespace, keeping non-essential methods from cluttering up the public interface to your code.
 
-// add5 and add10 are both closures. They share the same function body definition, but store different environments. In add5's environment, x is 5. As far as add10 is concerned, x is 10.
+// Here's how to define some public functions that can access private functions and variables, using closures which is also known as the module pattern:
+
+
+var counter = (function(){
+
+	//creted a single env which is shared by 3 fns...counter.increment, counter.decrement and counter.value...
+
+	//the shared env is in the body of an anon function, which is executed as soon as it has been defined.....
+	///privateCounter and a fun changeBy are private items...
+	///cannot be accessed directly from outside the anon fn...
+	///they must be acessed by 3 public fns that are returned from the anonymous wrapper...
+
+
+	//these 3 public fns are closures that share the same env....(due to lexical scoping)
+	var privateCounter = 0;
+	//console.log(privateCounter);
+	function changeBy(val){
+		privateCounter += val;
+	}
+
+
+	return{
+		increment: function(){
+			changeBy(1);
+		},
+		decrement :function(){
+			changeBy(-1);
+		},
+		value: function(){
+			return privateCounter;
+		}
+
+	};
+})();
+
+
+
+console.log(counter);   //returns an obj with dec, inc and value
+console.log(counter.value());  //0
+counter.increment();
+counter.increment();
+console.log(counter.value());  //2
+counter.decrement();
+console.log(counter.value());   //1
