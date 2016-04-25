@@ -12,7 +12,7 @@
 // Here's how to define some public functions that can access private functions and variables, using closures which is also known as the module pattern:
 
 
-var makeCounter = (function(){
+var makeCounter = function(){
 
 
 	var privateCounter = 0;
@@ -34,19 +34,19 @@ var makeCounter = (function(){
 		}
 
 	};
-})();
+};
 
-////see here using anon func for make counter...only executed once...
-/////so counter1 and counter2 deal with the same shit....
-///look at next commit to make the counters different...
-///for that, you should not use anon fun....v v imp
-
-var counter1 = makeCounter;
-var counter2 = makeCounter;
+///now two distinc counters...different from the prev expample as we do not have anon fn here...
+var counter1 = makeCounter();
+var counter2 = makeCounter();
 console.log(counter1.value()); /* Alerts 0 */
 counter1.increment();
 counter1.increment();
 console.log(counter1.value()); /* Alerts 2 */
 counter1.decrement();
 console.log(counter1.value()); /* Alerts 1 */
-console.log(counter2.value()); /* Alerts 1 */
+console.log(counter2.value()); /* Alerts 0 */
+
+// Notice how each of the two counters maintains its independence from the other. Its environment during the call of the makeCounter() function is different each time. The closure variable privateCounter contains a different instance each time.
+
+// Using closures in this way provides a number of benefits that are normally associated with object oriented programming, in particular data hiding and encapsulation.
