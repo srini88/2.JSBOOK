@@ -33,6 +33,9 @@ var addTo = function (){
 	var inner = 2;
 	return passed + inner;
 };
+console.log(addTo());  //returns 5
 
-console.log(addTo());  // still 5..
+passed = 5;
+
+console.log(addTo());  //returns 7
 
