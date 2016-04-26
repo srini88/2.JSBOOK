@@ -17,9 +17,13 @@ var btn = document.getElementById("btn");
 // var elem = document.getElementById("para1");
 // console.log(elem);
 console.log(btn);
-btn.addEventListener("click", function(event){
+btn.addEventListener("click", eve );
+
+//note we passed eve instead of eve() to our addEventListeneer function...when you pass a function by name without parantheses , tyou are passing the function object itself....when you pass it with parantehese, you are passing the result of executing that functin
+
+
+function eve(event){
 
 	console.log(event);
 	console.log("nigga you clicked the btn");
-
-});
+}
