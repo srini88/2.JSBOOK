@@ -1,52 +1,25 @@
 
+// http://www.sitepoint.com/higher-order-functions-javascript/
 
-// Languages such as Java provide the ability to declare methods private, meaning that they can only be called by other methods in the same class.
+///first class functions....
 
-// ///////js does not have native way to make shit private...
-// ////emulate private methods using closures...
-// ////learn module pattern..
+// js treats functionsa as first claszs citizens...means objects...they can be assigned as the value of a variable...can be passed and returned just like any other refgerence variable...
 
-
-// JavaScript does not provide a native way of doing this, but it is possible to emulate private methods using closures. Private methods aren't just useful for restricting access to code: they also provide a powerful way of managing your global namespace, keeping non-essential methods from cluttering up the public interface to your code.
-
-// Here's how to define some public functions that can access private functions and variables, using closures which is also known as the module pattern:
+// fns use a callback...a cb is a fn that gets executed at the edn of the operation, once all all the other operations have been completed....
 
 
-var makeCounter = function(){
+// JS is single threaded...only one operation at a time.....each operation that is going to happen is queued along this single thread....we are allowing async behavior....
 
 
-	var privateCounter = 0;
-	//console.log(privateCounter);
-	function changeBy(val){
-		privateCounter += val;
-	}
 
+var btn = document.getElementById("btn");
 
-	return{
-		increment: function(){
-			changeBy(1);
-		},
-		decrement :function(){
-			changeBy(-1);
-		},
-		value: function(){
-			return privateCounter;
-		}
+// var elem = document.getElementById("para1");
+// console.log(elem);
+console.log(btn);
+btn.addEventListener("click", function(event){
 
-	};
-};
+	console.log(event);
+	console.log("nigga you clicked the btn");
 
-///now two distinc counters...different from the prev expample as we do not have anon fn here...
-var counter1 = makeCounter();
-var counter2 = makeCounter();
-console.log(counter1.value()); /* Alerts 0 */
-counter1.increment();
-counter1.increment();
-console.log(counter1.value()); /* Alerts 2 */
-counter1.decrement();
-console.log(counter1.value()); /* Alerts 1 */
-console.log(counter2.value()); /* Alerts 0 */
-
-// Notice how each of the two counters maintains its independence from the other. Its environment during the call of the makeCounter() function is different each time. The closure variable privateCounter contains a different instance each time.
-
-// Using closures in this way provides a number of benefits that are normally associated with object oriented programming, in particular data hiding and encapsulation.
+});
