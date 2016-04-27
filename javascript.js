@@ -21,14 +21,20 @@
 
 
 function range(start, edge, stop){
-
-	console.log(arguments.length);  //2
+	console.log(arguments.length);  //1
 	//if only one argument was passed, make it the edge and 0 the start..
-	//if (arguments.length == 1)
+	if (arguments.length == 1){
+		edge = start;   ///first arg is in start..so we nneed tht for edge
+		start =0;
+	}
 
+	step =1;
+
+	//create an array of numbers
+	for (var ret = []; (edge-start) * step>0; start +=step){
+		ret.push(start);
+	}
+	return ret;
 }
+console.log(range(10));   //prints [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-
-console.log(range(10, 20));  
-console.log(range.length);  //3
-// console.log(range(1,9));
