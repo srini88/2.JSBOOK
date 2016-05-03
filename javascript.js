@@ -33,7 +33,7 @@ NameSpace.Singleton = (function(){
 			return "fuck you nigga " + privateAttr1;  //this.privateAttr1 gives undefined
 		},
 		publicMethod2 : function(){
-
+			return "you are a sucker";
 		}
 	};
 } //close of Init
@@ -43,8 +43,13 @@ NameSpace.Singleton = (function(){
 			if (!instance){  //check already exists
 				console.log("creating instance");
 				instance = init();
+				return instance;
 			}
-			return instance;
+			else{
+				console.log("returning 2nd hand");
+				return instance;
+			}
+			
 		}
 
 
@@ -53,24 +58,16 @@ NameSpace.Singleton = (function(){
 })();
 
 console.log(NameSpace);
-console.log(NameSpace.Singleton.getInstance());  ///will get the godammn instance..
-//Object {publicAttr1: true, publicAttr2: 21}
+//now all clean...you can see it does not print creating instance by default...this is the lazy load shit...... it will only create wihen you ask for it...
+//previously it creates and put it in memory....
+
+///now adding more...
 
 console.log(NameSpace.Singleton.getInstance().publicMethod1());
-//fuck you nigga false
 
-var singleA = NameSpace.Singleton.getInstance();
-var singleB = NameSpace.Singleton.getInstance();
+console.log(NameSpace.Singleton.getInstance().publicMethod2());
 
-console.log(singleA === singleB);   //true
-
-// I guess the most famous Singleton probably looks like this: $. To put it another way, ever notice how you can use jQuery anywhere in your app after you've included it on the page...? Boom! Singleton!
-
-
-// The Singleton object is implemented as an immediate anonymous function. The function executes immediately by wrapping it in brackets followed by two additional brackets. It is called anonymous because it doesn't have a name. 
-// //////it executes immediately as we need the interface to get the singleton..
-
-
-// The getInstance method is Singleton's gatekeeper. It returns the one and only instance of the object while maintaining a private reference to it which is not accessible to the outside world.
-
-// The getInstance method demonstates another design pattern called Lazy Load. Lazy Load checks if an instance has already been created; if not, it creates one and stores it for future reference. All subsequent calls will receive the stored instance. Lazy loading is a CPU and memory saving technique by creating objects only when absolutely necessary.
+// creating instance
+// fuck you nigga false
+// returning 2nd hand
+// you are a sucker
