@@ -1,16 +1,18 @@
-////now dealing with deep copy..
+var p1 ={
 
-var newObj = $.extend(true, {}, oldObj);
-
-function deepCopy(oldObj) {
-    var newObj = oldObj;
-    if (oldObj && typeof oldObj === 'object') {
-        newObj = Object.prototype.toString.call(oldObj) === "[object Array]" ? [] : {};
-        for (var i in oldObj) {
-            newObj[i] = deepCopy(oldObj[i]);
-        }
-    }
-    return newObj;
+	name :"srini"
+}
+var p2 = {
+	name : "palghat"
 }
 
-In jQuery, $.clone() method only clones DOM elements.
+
+function say(msg){
+	this.name = msg;
+	//console.log(msg);
+}
+//changing p1's name using call
+say.call(p1, "basha" );
+console.log(p1);  //Object {name: "basha"} //this is p1 here and you are modifying p1 itslef...
+
+
