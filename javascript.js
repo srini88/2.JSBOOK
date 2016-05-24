@@ -1,11 +1,3 @@
-// var Person = {
-// 	name : "srini",
-// 	age :21
-// }
-
-
-
-// var p1 = new Person;  //this does not work..Person has to be a constructor function./..
 
 var Person = function(){
 
@@ -13,9 +5,27 @@ var Person = function(){
 	this.age = 21;
 }
 
+console.log(Person.prototype)  //empty object..no shit added
+
+//problem with this here
+Person.prototype = {
+
+	sayName : function(){
+		console.log("Saying name");
+	},
+	tellMore :function(){
+		console.log("telling more");
+	}
+
+}
+
+
+console.log(Person.prototype)  //above 2 methods will be there
+
 var p1 = new Person;
 
-console.log(Object.getPrototypeOf(p1) === Person)  //false
-console.log(Object.getPrototypeOf(p1) === Person.prototype)  //true
 
-console.log(p1.constructor === Person)  //true
+console.log(p1.constructor)  //going to Object...main obj
+console.log(p1.constructor === Person)  //getting false, because we fucked up prototype 
+
+console.log(p1.constructor === Object)  //true..went to main obj
