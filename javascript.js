@@ -1,16 +1,21 @@
-////now dealing with deep copy..
+// var Person = {
+// 	name : "srini",
+// 	age :21
+// }
 
-var newObj = $.extend(true, {}, oldObj);
 
-function deepCopy(oldObj) {
-    var newObj = oldObj;
-    if (oldObj && typeof oldObj === 'object') {
-        newObj = Object.prototype.toString.call(oldObj) === "[object Array]" ? [] : {};
-        for (var i in oldObj) {
-            newObj[i] = deepCopy(oldObj[i]);
-        }
-    }
-    return newObj;
+
+// var p1 = new Person;  //this does not work..Person has to be a constructor function./..
+
+var Person = function(){
+
+	this.name = "srini";
+	this.age = 21;
 }
 
-In jQuery, $.clone() method only clones DOM elements.
+var p1 = new Person;
+
+console.log(Object.getPrototypeOf(p1) === Person)  //false
+console.log(Object.getPrototypeOf(p1) === Person.prototype)  //true
+
+console.log(p1.constructor === Person)  //true
