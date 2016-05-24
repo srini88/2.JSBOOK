@@ -1,29 +1,16 @@
 
-the problem with object oriented code...
+///closures trying out...
+///if I dont use IIFE
+var ab = function(){
 
-objects separate code and prevent spaghetti ..
+	var counter =0;
+	return function(){
+		return ++counter;
+	}
+}
 
-but the parts of a pgm Need to know about one -another..
+var counter =ab();  //got to use this to execute this shit..
 
-which leads back towards spaghetti ..
+console.log(counter());  //1
+console.log(counter());  //2
 
-the problem is dependency...
-
-
-
-singleton and static methods...
-
-A singleton is a class --- only one object will exist during the life time of application..
-
-
-how do I get access to instance from a random location -- advantage...
-
-
-Anytime I communicate or access with the PlayerModel I m making a concrete dependency somewhere in the app...
-
-makes the application interconnected...
-
-
---- code rapidly becomes interdependent...
-= highly focused on all classes working correctly...
-- 
