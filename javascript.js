@@ -15,15 +15,16 @@ function Grizzly(name){
 
 Grizzly.prototype = Object.create(Bear.prototype);
 
-
+Grizzly.prototype.growl = function(){
+    console.log("on the grizzly protottype")
+}
 var grizzly = new Grizzly('grizz'); 
  
 
+console.log(grizzly.growl())   //prints on the grizzly protottype
 
-grizzly.growl = function(){   //growl function on grizzly itself
-    console.log("override")
-}
-console.log(grizzly.growl())   //prints override...
+//it checks is there a growl function on grizzly, no ..then go to Grizzly's prototype found it rthere...
+
 
 ///how does it know growl 
 ///is there a grown fulction here in grizzly , or Grizzly.prototype or Bear.prototyp
