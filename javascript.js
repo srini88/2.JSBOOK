@@ -1,19 +1,24 @@
-var animal = {
-    eats :true
+function Rectangle (length, width){
+    this.length = length;
+    this.width = width;
 }
 
-var rabbit = {
-    jumps :true
+Rectangle.prototype.getArea = function(){
+    return "rect area: "+ (this.length * this.width);
+}
+
+function Square(side1){
+
+    Rectangle.call(this, side1, side1)
 }
 
 
-rabbit = Object.create(animal);
+Square.prototype = Object.create(Rectangle.prototype)
+
+var square = new Square(3);
+
+console.log(square.getArea())
 
 
-console.log(rabbit.eats)  //true
 
-console.log(Object.getPrototypeOf(rabbit));
-console.log(Object.getPrototypeOf(rabbit) ===animal) //true
-
-console.log(animal.isPrototypeOf(rabbit))  //true
 
