@@ -15,9 +15,9 @@ function Grizzly(name){
 
 Grizzly.prototype = Object.create(Bear.prototype);
 
-Grizzly.prototype.growl = function(){
-    console.log("on the grizzly protottype")
-}
+// Grizzly.prototype.growl = function(){
+//     console.log("on the grizzly protottype")
+// }
 var grizzly = new Grizzly('grizz'); 
  
 
@@ -28,3 +28,6 @@ console.log(grizzly.growl())   //prints on the grizzly protottype
 
 ///how does it know growl 
 ///is there a grown fulction here in grizzly , or Grizzly.prototype or Bear.prototyp
+
+
+///THis works.......calling Bear.call in Grizzly.... and setting Grizzly protoyep to bear.prototype .....2 things you are setting....  i'm not sure where I saw three variabtions....think
