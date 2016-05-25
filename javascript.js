@@ -11,17 +11,19 @@ function Grizzly(name){
     Bear.call(this,name);  //cll this Bear  constructor using this instance
 }
 
-///we can inherit the Bear by assigning the prototype of girzlly to bear
 
-//Grizzly.prototype = Bear.prototype   //this just makes equall to bear...wrong..
-/// we need a new object that is based of off Bear.prototype...
 
 Grizzly.prototype = Object.create(Bear.prototype);
 
 
-var grizzly = new Grizzly('grizz'); //since Grizzly inherits Bear prototype our grizzly instance still have growl method...
-//var polar = new ("polar");
-//console.log(grizzly.growl())  //undefinedsays grr  
+var grizzly = new Grizzly('grizz'); 
+ 
 
-//why sayign undefined.....  in the constructor of Grizzly() we are not calling the constructor of Bear
-console.log(grizzly.growl())  //now you get grizz says grr
+
+grizzly.growl = function(){   //growl function on grizzly itself
+    console.log("override")
+}
+console.log(grizzly.growl())   //prints override...
+
+///how does it know growl 
+///is there a grown fulction here in grizzly , or Grizzly.prototype or Bear.prototyp
