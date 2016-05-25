@@ -5,18 +5,20 @@ function Bear(type){
 Bear.prototype.growl = function(){
     console.log(this.type + "says grr");
 }
+///create another class called grizzly
+
+function Grizzly(){
+
+}
+
+///we can inherit the Bear by assigning the prototype of girzlly to bear
+
+//Grizzly.prototype = Bear.prototype   //this just makes equall to bear...wrong..
+/// we need a new object that is based of off Bear.prototype...
+
+Grizzly.prototype = Object.create(Bear.prototype);
 
 
-///Linked bear.prototype to grizzly and polar..//this is the distinctiion when usng the constructor functions...
-
-var grizzly = new Bear("grizzly");
-var polar = new Bear("polar");
-console.log(grizzly.growl(),polar.growl())
-
-console.log(grizzly.constructor === Bear)  //true
-
-console.log(Bear.prototype)  //this has growll
-
-console.log(Object.getPrototypeOf(grizzly) === Bear.prototype)  //true
-
-console.log(Bear.prototype.isPrototypeOf(grizzly))  //true
+var grizzly = new Grizzly(); //since Grizzly inherits Bear prototype our grizzly instance still have growl method...
+//var polar = new ("polar");
+console.log(grizzly.growl())  //undefinedsays grr  
