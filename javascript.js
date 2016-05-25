@@ -7,8 +7,8 @@ Bear.prototype.growl = function(){
 }
 ///create another class called grizzly
 
-function Grizzly(){
-    Bear.call(this,'grizzly');  //cll this Bear  constructor using this instance
+function Grizzly(name){
+    Bear.call(this,name);  //cll this Bear  constructor using this instance
 }
 
 ///we can inherit the Bear by assigning the prototype of girzlly to bear
@@ -19,9 +19,9 @@ function Grizzly(){
 Grizzly.prototype = Object.create(Bear.prototype);
 
 
-var grizzly = new Grizzly(); //since Grizzly inherits Bear prototype our grizzly instance still have growl method...
+var grizzly = new Grizzly('grizz'); //since Grizzly inherits Bear prototype our grizzly instance still have growl method...
 //var polar = new ("polar");
 //console.log(grizzly.growl())  //undefinedsays grr  
 
 //why sayign undefined.....  in the constructor of Grizzly() we are not calling the constructor of Bear
-console.log(grizzly.growl())  //now you get grizzly says grr
+console.log(grizzly.growl())  //now you get grizz says grr
