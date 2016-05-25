@@ -1,11 +1,8 @@
 
-///developer convertion..you should use a new keyword to create an instance of Bear
-/////first way to do the inheritance using new keyword and the constructor function...
-///The other wa is to do Object.creeate() - you give parent object directly..
-function Bear(){
-
+function Bear(type){
+    this.type = type;
 }
 
-var grizzly = new Bear();
-var polar = new Bear();
+var grizzly = new Bear("grizzly");
+var polar = new Bear("polar");
 console.log(grizzly,polar)
