@@ -1,20 +1,26 @@
-var mortal = {
-	name :"Im a mortal"
+//var str = "aabcccccaaac";
+var str = "abcd";
+
+function manipulation (str){
+
+	var output = "";
+	var temp  = str[0];
+	var count = 1;
+	for (var i=1; i <str.length; ++i){
+
+		 if(str[i] === temp){
+		 	++count;
+		 }
+		 else{
+		 	output += temp+count;
+
+		 	temp = str[i]; ///
+		 	count =1;   //came to new character..count updating to 1
+		 }
+	}
+	output += temp+count;  //without this getting a2b1c5
+	return (output.length > str.length)? str: output;
+
 }
-var human = Object.create(mortal);
 
-
-console.log(Object.getPrototypeOf(human) === mortal)
-
-console.log(mortal.prototype === Object.getPrototypeOf(human))
-console.log(mortal.isPrototypeOf(human))
-
-
-
-
-
-// human.name = "Im a human";
-// console.log(human.name)
-// var badhuman = Object.create(human);
-// console.log(badhuman)
-
+console.log(manipulation(str));  //a2b1c5
