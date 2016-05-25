@@ -1,12 +1,11 @@
-// JS runs in a single thread , will only do one thing at a time... so you got to prevent blocking...
 
-///prototypal inheritance....Kyle channel...
-
-
-function bear(){
+///developer convertion..you should use a new keyword to create an instance of Bear
+/////first way to do the inheritance using new keyword and the constructor function...
+///The other wa is to do Object.creeate() - you give parent object directly..
+function Bear(){
 
 }
-bear.type ="grizzly"    //functions are objects in JS.....bear is a function..still you can add properties to it..
 
-console.log(bear.type)    
-
+var grizzly = new Bear();
+var polar = new Bear();
+console.log(grizzly,polar)
