@@ -1,23 +1,19 @@
-function Drink(drink){
-    this.drink = drink;
-
+var animal = {
+    eats :true
 }
 
-Drink.prototype.getDrink = function(){
-    return this.drink;
+var rabbit = {
+    jumps :true
 }
 
 
-var coke = new Drink("coke");
-
-console.log(coke.constructor === Drink)  //true
-
-console.log(Drink.prototype.isPrototypeOf(coke))  ////true
+rabbit = Object.create(animal);
 
 
-console.log(Drink.prototype.isPrototypeOf(new Drink)) //true
+console.log(rabbit.eats)  //true
 
+console.log(Object.getPrototypeOf(rabbit));
+console.log(Object.getPrototypeOf(rabbit) ===animal) //true
 
-
-console.log(Drink.constructor)  //some native shit
+console.log(animal.isPrototypeOf(rabbit))  //true
 
