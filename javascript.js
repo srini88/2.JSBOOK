@@ -1,19 +1,12 @@
-function validParentheses(n) {
-    var combos = [ ];
-    function getCombinations(openNum,closingNum,curr) {
-        if (openNum === 0 && closingNum === 0)
-            combos.push(curr);
-        if (openNum > 0) {
-            getCombinations(openNum-1, closingNum + 1, curr + "(");
-        }
-        if (closingNum > 0) {
-            getCombinations(openNum, closingNum - 1, curr + ")");
-        }
-    }
-    getCombinations(n,0,"");
-    return combos.length;
+// JS runs in a single thread , will only do one thing at a time... so you got to prevent blocking...
+
+///prototypal inheritance....Kyle channel...
+
+
+function bear(){
 
 }
+bear.type ="grizzly"    //functions are objects in JS.....bear is a function..still you can add properties to it..
 
+console.log(bear.type)    
 
-console.log(validParentheses(4))
