@@ -1,24 +1,28 @@
-function Rectangle (length, width){
-    this.length = length;
-    this.width = width;
-}
+var singleton = (function(){
+console.log("hi")
+	var instance ;
+	var p1;
+	var p2;
 
-Rectangle.prototype.getArea = function(){
-    return "rect area: "+ (this.length * this.width);
-}
+	function init(){
+		return {
+			p1:5, 
+			p2 :6,
+			pMethod :function(){
+				return "fuck off";
+			}
+		}
+	}
+	return {
+		getInstance :function(){
+			if (!instance){
+				console.log("creating instance")
+				instance = init();
+			}
+			return instance;
+		}
+	}
+})();
 
-function Square(side1){
-
-    Rectangle.call(this, side1, side1)
-}
-
-
-Square.prototype = Object.create(Rectangle.prototype)
-
-var square = new Square(3);
-
-console.log(square.getArea())
-
-
-
-
+console.log(singleton.getInstance().pMethod())
+console.log(singleton.getInstance().pMethod())
